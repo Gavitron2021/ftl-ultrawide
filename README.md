@@ -2,7 +2,7 @@
 
 An experimental Windows presentation mod for **FTL: Faster Than Light, base game with Advanced Edition**. Adds **Fullscreen (Modded)**, expands the scene, moves the HUD to the edges, and adapts menus, scenery and screen effects for **3440×1440's aspect ratio (43:18)**.
 
-**[Download beta](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2)** · **[Install / restore](docs/INSTALL.md)** · **[Compatibility](docs/COMPATIBILITY.md)** · **[Report issues](https://github.com/Gavitron2021/ftl-ultrawide/issues/new/choose)**
+**[Download beta](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2)** · **[Install / restore](docs/INSTALL.md)** · **[Agent / LLM setup prompts](docs/AGENT-SETUP.md)** · **[Compatibility](docs/COMPATIBILITY.md)** · **[Report issues](https://github.com/Gavitron2021/ftl-ultrawide/issues/new/choose)**
 
 This is a community-test beta. Selected menus, shops, combat encounters, nebula/storm effects, Credits, startup and original profile import have been checked. **A complete campaign has not been validated.**
 
@@ -26,6 +26,21 @@ This is a community-test beta. Selected menus, shops, combat encounters, nebula/
 - **Python 3.11+**, Pillow, write access to the game folder and a supported primary display. The release ZIP supplies our compiled launcher; a source build also needs MSVC x86 tools.
 
 No game executable, full `ftl.dat`, save, local backup or upstream visual mod is distributed. The builder reconstructs a private installation payload from each player's own files. Do not upload that generated payload.
+
+## Required visual mod downloads
+
+Get these exact inputs from their authors. All four are required by the current builder; this beta does not provide an optional-dependency selection. Place them in your dependency folder **without installing them separately into FTL**. Our builder applies the compatible selection and load order locally. In particular, it uses only selected UI resources from the full Shiny archive.
+
+| Visual mod | Author download / project | Required file |
+| --- | --- | --- |
+| HighRes Backgrounds & Planets **2.0**, by Ouaz and upstream artists | [Download .ftl](https://github.com/Ouaz/FTL-diversityMod/raw/master/other/HighRes_Backgrounds_and_Planets_2.0.ftl) · [Project and credits](https://github.com/Ouaz/FTL-diversityMod#highres-backgrounds--planets-v20) | `HighRes_Backgrounds_and_Planets_2.0.ftl` |
+| Better Asteroids, by sanmonku | [Standalone download page](https://www.moddb.com/mods/better-planets-and-backgrounds/downloads/better-asteroids) | Extract the ZIP to obtain `better_asteroids.ftl` |
+| Shiny! UI and Graphics **v1.0 Vanilla**, by Russian Rockman | [Author thread and downloads](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=25839) — choose **Vanilla v1.0** | `Shiny_UI_and_Graphics_v1.0_Vanilla.ftl` |
+| Shiny Combat UI **2.0**, by Ouaz, based on Russian Rockman's UI | [Download .ftl](https://github.com/Ouaz/FTL-diversityMod/raw/master/other/Shiny_Combat_UI_2.0.ftl) · [Project and credits](https://github.com/Ouaz/FTL-diversityMod#shiny-combat-ui-20) | `Shiny_Combat_UI_2.0.ftl` |
+
+Files are checked against [`release/dependencies.json`](release/dependencies.json). Keep `.ftl` archives intact; extract only outer ZIPs that contain the required files. The [installation guide](docs/INSTALL.md#downloads) also links the pinned Hyperspace, ftlman and rollback inputs. If a link fails or the contents change, report it rather than substituting a different version.
+
+Using an LLM or coding agent to help? **[Copy the setup prompt](docs/AGENT-SETUP.md)**. It covers display checks, the exact downloads, local preparation, save preservation, verification and a separate installation step. Use an agent with local file/command access; a text-only chatbot can guide you through the steps but cannot perform or verify them itself.
 
 ## Display sizes
 

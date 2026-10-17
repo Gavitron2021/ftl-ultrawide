@@ -2,6 +2,8 @@
 
 This beta targets Windows Steam base FTL Advanced Edition at **3440×1440's aspect ratio**. [Read compatibility limits](COMPATIBILITY.md). Only 3440×1440 has hardware testing.
 
+If an agent or LLM is helping, use the **[copyable setup and installation prompts](AGENT-SETUP.md)**. They reference this guide and the shipped tools; preparation creates a local build before installation changes your game folder.
+
 ## Downloads
 
 Extract **FTL-Ultrawide-0.1.0-beta.2.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
@@ -13,12 +15,14 @@ Obtain these exact files from their authors and place/extract them under one dep
 | Hyperspace **1.23.2 Windows** | [Tagged release](https://github.com/FTL-Hyperspace/FTL-Hyperspace/releases/tag/v1.23.2) | Extract `Hyperspace.ftl`, original `Hyperspace.dll`, `xinput1_4.dll` |
 | ftlman **0.7.4 Windows** | [Tagged release](https://github.com/afishhh/ftlman/releases/tag/v0.7.4) | Extract its folder containing `ftlman.exe` |
 | Official Steam rollback patch | [FTL-Version-Rollback](https://github.com/FTL-Hyperspace/FTL-Version-Rollback) | `Steam-1.6.14.bps`, required by this pinned set even if already rolled back |
-| HighRes Backgrounds & Planets **2.0** | [Ouaz's download](https://github.com/Ouaz/FTL-diversityMod#highres-backgrounds--planets-v20), [thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=30003) | `HighRes_Backgrounds_and_Planets_2.0.ftl` |
-| Better Asteroids | Standalone download linked in the [HighRes thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=30003) | Extract ZIP to get `better_asteroids.ftl` |
-| Shiny! UI and Graphics **v1.0 Vanilla** | [Russian Rockman's thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=25839) | `Shiny_UI_and_Graphics_v1.0_Vanilla.ftl` |
-| Shiny Combat UI **2.0** | [Ouaz's download](https://github.com/Ouaz/FTL-diversityMod#shiny-combat-ui-20) | `Shiny_Combat_UI_2.0.ftl` |
+| HighRes Backgrounds & Planets **2.0** | [Download .ftl](https://github.com/Ouaz/FTL-diversityMod/raw/master/other/HighRes_Backgrounds_and_Planets_2.0.ftl), [Ouaz's project](https://github.com/Ouaz/FTL-diversityMod#highres-backgrounds--planets-v20), [thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=30003) | `HighRes_Backgrounds_and_Planets_2.0.ftl` |
+| Better Asteroids | [Standalone author download on ModDB](https://www.moddb.com/mods/better-planets-and-backgrounds/downloads/better-asteroids) | Extract ZIP to get `better_asteroids.ftl` |
+| Shiny! UI and Graphics **v1.0 Vanilla** | [Russian Rockman's thread and downloads](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=25839) — choose **Vanilla v1.0** | `Shiny_UI_and_Graphics_v1.0_Vanilla.ftl` |
+| Shiny Combat UI **2.0** | [Download .ftl](https://github.com/Ouaz/FTL-diversityMod/raw/master/other/Shiny_Combat_UI_2.0.ftl), [Ouaz's project](https://github.com/Ouaz/FTL-diversityMod#shiny-combat-ui-20) | `Shiny_Combat_UI_2.0.ftl` |
 
 If a download changes or disappears, open an issue. Do not substitute DLLs or bypass the hash checks. We do not mirror the original visual mods. [Credits and provenance](../CREDITS.md).
+
+All four visual archives are required by the current builder. Keep `.ftl` files intact; extract outer download ZIPs only as needed to expose the listed files. **Do not first apply these mods to your live game with another mod manager.** Supply them as inputs: our builder selects compatible Shiny UI assets and applies the tested load order in the private build directory.
 
 Install **Python 3.11+**, then from the extracted mod directory:
 
