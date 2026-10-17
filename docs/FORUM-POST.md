@@ -12,7 +12,7 @@ Copy the BBCode below into a new topic. Review the formatted preview before subm
 I've been working on a presentation mod for base-game FTL with Advanced Edition, targeting my 3440x1440 ultrawide display. It expands the game scene and places the HUD at the sides, with wider scenery and adapted menus/effects.
 
 [b]Download / source / instructions[/b]
-[url=https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.1]Beta download and SHA-256 checksum[/url]
+[url=https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2]Beta download and SHA-256 checksum[/url]
 [url=https://github.com/Gavitron2021/ftl-ultrawide]Public source repository[/url]
 [url=https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md]Installation, saves and rollback[/url]
 [url=https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/COMPATIBILITY.md]Exact display support and test scope[/url]

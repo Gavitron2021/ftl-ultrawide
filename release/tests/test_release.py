@@ -97,7 +97,7 @@ class InstallerTests(unittest.TestCase):
     def test_copy_failure_automatically_restores(self):
         real=uw.shutil.copy2
         def fail_once(source,destination,*a,**kw):
-            if Path(source)==self.payload/'xinput1_4.dll':raise OSError('synthetic interrupted install')
+            if Path(source).resolve()==(self.payload/'xinput1_4.dll').resolve():raise OSError('synthetic interrupted install')
             return real(source,destination,*a,**kw)
         with patch.object(uw.shutil,'copy2',side_effect=fail_once):
             with self.assertRaises(OSError):self.install()

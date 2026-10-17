@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.2
+
+- Corrected the interrupted-install test's comparison of Windows short and long path aliases on GitHub's clean runner. Product rendering and installation behavior are unchanged.
+- Refreshed the source/download package to include that test correction; supersedes the initial beta.1 upload.
+
 ## 0.1.0-beta.1
 
 First public Windows Steam beta for 3440×1440, Steam FTL 1.6.9 and Hyperspace 1.23.2.

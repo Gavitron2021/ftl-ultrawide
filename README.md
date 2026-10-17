@@ -2,7 +2,7 @@
 
 An experimental Windows presentation mod for **FTL: Faster Than Light, base game with Advanced Edition**. Adds **Fullscreen (Modded)**, expands the scene, moves the HUD to the edges, and adapts menus, scenery and screen effects for **3440×1440's aspect ratio (43:18)**.
 
-**[Download beta](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.1)** · **[Install / restore](docs/INSTALL.md)** · **[Compatibility](docs/COMPATIBILITY.md)** · **[Report issues](https://github.com/Gavitron2021/ftl-ultrawide/issues/new/choose)**
+**[Download beta](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2)** · **[Install / restore](docs/INSTALL.md)** · **[Compatibility](docs/COMPATIBILITY.md)** · **[Report issues](https://github.com/Gavitron2021/ftl-ultrawide/issues/new/choose)**
 
 This is a community-test beta. Selected menus, shops, combat encounters, nebula/storm effects, Credits, startup and original profile import have been checked. **A complete campaign has not been validated.**
 

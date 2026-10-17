@@ -310,7 +310,7 @@ def build(args):
     # player's build only, and never belongs in the installation payload.
     if (payload/'ftl.dat.vanilla').exists():(payload/'ftl.dat.vanilla').unlink()
     require({p.name for p in payload.iterdir()}==PAYLOAD,'Unexpected build payload file')
-    write_json(out/'build.json',{'version':'0.1.0-beta.1','sourceExeSha256':file_hash(game/'FTLGame.exe'),
+    write_json(out/'build.json',{'version':'0.1.0-beta.2','sourceExeSha256':file_hash(game/'FTLGame.exe'),
                'sourceArchiveSha256':VANILLA_DAT,'verification':verification,
                'files':{p.name:file_hash(p) for p in sorted(payload.iterdir())}})
     print(json.dumps({'built':str(out),'verification':verification},indent=2))
