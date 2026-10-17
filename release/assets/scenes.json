@@ -1,0 +1,219 @@
+[
+  {
+    "source": "img/stars/bg_blueStarcluster.png",
+    "image": "assets/scenes/bg_blueStarcluster-full-v1.png",
+    "sha256": "6b7cc34c83865f3805c734bd2731aa9176df0486e91550a352ea58b44633a3de",
+    "pixelSha256": "d20a624a4310eb691d45b15d540c7c4449f9ffc694923c967b9f98cd5e6092c1",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_darknebula.png",
+    "image": "assets/scenes/bg_darknebula-full-v1.png",
+    "sha256": "fb242238d7cd071acc79a0507c7edf5850e3a3f857c3d4ceb98b495442bc3204",
+    "pixelSha256": "8b23ce8fef5de597452993ecf97bebc3a4c891504e55f3fe38e628e965093c3c",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_dullstars.png",
+    "image": "assets/scenes/bg_dullstars-full-v1.png",
+    "sha256": "6a8a213617573fb188e574535f8271b863640d98ad962482ef1eca8bbdb4da4a",
+    "pixelSha256": "dc2c36b5618e9a62ced50ffcc79986cc981a380eacbf0adb0e3f985704d9d3d3",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_dullstars2.png",
+    "image": "assets/scenes/bg_dullstars2-full-v1.png",
+    "sha256": "3b7b65632cd72a65c4c1afe31531edeccf78055bb3048d110ef98542551dcde3",
+    "pixelSha256": "f91d8cd6249c5120d2474c473ec14c22e418c3a7188f06cadf9fe79e7f72ef63",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_lonelyBlueStar.png",
+    "image": "assets/scenes/bg_lonelyBlueStar-full-v1.png",
+    "sha256": "e6956c63a41e4a50a507dc44400f93bb5844971c678a824096d452375d416fcf",
+    "pixelSha256": "f21eb7460f4006ebf3754488656f3ded676275a57a19c07b61e4f28c9a9f5838",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_lonelyRedStar.png",
+    "image": "assets/scenes/bg_lonelyRedStar-full-v1.png",
+    "sha256": "5074ff18c43fb478b2465722b03976b64014584cf7efd2e0fa8659307e8fa27a",
+    "pixelSha256": "6860d9fb806266f09736e3be607f96b6d1ae3de7a65aa0e208fbad6171f24898",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_lonelystar.png",
+    "image": "assets/scenes/bg_lonelystar-full-v1.png",
+    "sha256": "452aa9b21f815af84dd4ea49ad96652a28238b61eeafa1ec18b7ff0375daa04f",
+    "pixelSha256": "5c06b0d614e93873e5a3942ee00ddd09c7b3e28bbf7c21cabc06fefe8b6a2124",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/bg_smallbluenebula.png",
+    "image": "assets/scenes/bg_smallbluenebula-full-v1.png",
+    "sha256": "c608a6f90eb814cab5ade15e6f5a4c9b979b363a0ce4e4b23567760dcb10a842",
+    "pixelSha256": "41bb4c0baafe7f61c552296699b39325314086062cf6c3deecc793e8cb6ecab4",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula1.png",
+    "image": "assets/scenes/z_bg_nebula1-full-v1.png",
+    "sha256": "ec5347af8a23fd83d7d93bade19f745673972c2087e86bdf7e31caee0bee4cd7",
+    "pixelSha256": "a1c1bec86806f8faca210d5dba75baf94e4c8df53d253f7c7e8f14a74957be1f",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula2.png",
+    "image": "assets/scenes/z_bg_nebula2-full-v1.png",
+    "sha256": "b0b05eb6837d83f7d2ddac182cb693fcc3d1d21632a7eb9efdfd576bd4f2f07a",
+    "pixelSha256": "28ac774d2da5f9e145f51c13fa35a8fd71c41849c3a80e5cb0c22c62f5b7bb7d",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula3.png",
+    "image": "assets/scenes/z_bg_nebula3-full-v1.png",
+    "sha256": "6e3564781ce89df3dac3e4c1d7dda8200b2a5daf5cfbf9badfcbb03120d1b3a8",
+    "pixelSha256": "7e244ea637db7525116afcd3f5bd80a2a29b5b07a06a078b68c4edb73c0578fc",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula4.png",
+    "image": "assets/scenes/z_bg_nebula4-full-v1.png",
+    "sha256": "abc783d04e8a6349388d76918f435cff5c7de784b6c44d7702dcdc9475f8d15d",
+    "pixelSha256": "d1d680f5ceb22ec5dc6a1caea9cba52c7277f88b828363c1077394016292b614",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula5.png",
+    "image": "assets/scenes/z_bg_nebula5-full-v1.png",
+    "sha256": "2ae484b4eea28cd96cbb6449ef5ba56dc8f6c53144578aa385a526ebeae6345c",
+    "pixelSha256": "bc0949ff137b6b1a0e008c8bcee13c5070877525d880bf85a45c671f9d714373",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula6.png",
+    "image": "assets/scenes/z_bg_nebula6-full-v1.png",
+    "sha256": "935e8ca091cbcc5343ed96b1c2db750fb79b7b701e0ea08ce14e62b9fbeb0b87",
+    "pixelSha256": "a553ed5788a185f289066a04ba96f680e5b8f112fbd7982cadd402cce9f92f61",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula7.png",
+    "image": "assets/scenes/z_bg_nebula7-full-v1.png",
+    "sha256": "080fef75d93055295bd97799af552525a577eb2f5132618647ca52aed0284bf0",
+    "pixelSha256": "0d66a733169112061b7606f889ebde33d4144e8f0caf016a923945966064189a",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula8.png",
+    "image": "assets/scenes/z_bg_nebula8-full-v1.png",
+    "sha256": "6e308d6b7550214801cdb2054d4b1e13a68ce1a2c019b5a6885fad35aa6d1d59",
+    "pixelSha256": "7a5f381b7ce14b3ac3bda23928557a2d284e1411e214f614e665a11ddf4cd531",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula9.png",
+    "image": "assets/scenes/z_bg_nebula9-full-v1.png",
+    "sha256": "a8da2c3914b534773709103345675b018854304016019be1fcf4f4d4eea527c1",
+    "pixelSha256": "79e73e3c7c60625616391500b73aa89b53b5f74225aa240e18d499a66251ca08",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula10.png",
+    "image": "assets/scenes/z_bg_nebula10-full-v1.png",
+    "sha256": "b915415d08899e3cf5e655d1f4a493e21ea13573489d06604c4e125950caa9ff",
+    "pixelSha256": "4ee95e3f94fb83089b9e59ac4e4fd0a72b9a8b1ce9c86cc5f9f314474f66743e",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula12.png",
+    "image": "assets/scenes/z_bg_nebula12-full-v1.png",
+    "sha256": "e67bc4fb18cf64812a5b1e595c4219c8fe5b059d05a57cce27624813d750100f",
+    "pixelSha256": "c1fb2d8832b12928ead2213d26004e991ef7abb6fc280c75b2204b8cedf4ec20",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula13.png",
+    "image": "assets/scenes/z_bg_nebula13-full-v1.png",
+    "sha256": "3bbd4bb32fd052afdcf2b3c3a6276f4095e01abeb0bcec01f2b6dc3232c30475",
+    "pixelSha256": "cd95224130f4545bb4440b62dc57d2bc9c32e725a5b1c4066f53bc225543dbbd",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_nebula16.png",
+    "image": "assets/scenes/z_bg_nebula16-full-v1.png",
+    "sha256": "a94f95c2ef7413d9971840774408f77855c74318df179258088bfe44f6c0c10c",
+    "pixelSha256": "bf8127f286b37a37d363cee2f014edd85df8ce67d9f86ce0540461d096223b02",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_hubble_29.png",
+    "image": "assets/scenes/z_bg_hubble_29-full-v1.png",
+    "sha256": "a2e1b5fc56b5f7959c591be67e30dd8ebbac54492b76d9943177ac76cb09d1f9",
+    "pixelSha256": "c444eaa2e1a9929f93b1b5e7d88e72a5b34ac3b704d7b564a47102c3db2b77d5",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_hubble_31.png",
+    "image": "assets/scenes/z_bg_hubble_31-full-v1.png",
+    "sha256": "97d73598acfddbee599e08ac19c5a1c8f72b647f464244a3556ca3ca15b3139d",
+    "pixelSha256": "026d5c36f3a66ab4a35288f55d927dd2801cf279227a2bc25b0c1f93e5e6fbbd",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_xandra_01.png",
+    "image": "assets/scenes/z_bg_xandra_01-full-v1.png",
+    "sha256": "16d1b2dee38dbb8ec2fcd6742b179723d498bafebff14ee8fd6d9232e762e10c",
+    "pixelSha256": "c79133a655ed72a865af996dbf5b7919d84c78c1273f396f7b98deabbfc02cfa",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_stars1.png",
+    "image": "assets/scenes/z_bg_stars1-full-v1.png",
+    "sha256": "5254479fafffc2c310d8126d9b35a40dfdf67f5aa6d89e4d52dcb8cfacae87e7",
+    "pixelSha256": "1f61be64e1317db878f1ab6c7f9b9f99fc84acf2fb0bf56948697c3cc20490c9",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/z_bg_sun_stars2.png",
+    "image": "assets/scenes/z_bg_sun_stars2-full-v1.png",
+    "sha256": "82b473875b282cd683875f9a6e6ce1ad9e68aab9d79e38bfc4488e8d68f8a4b0",
+    "pixelSha256": "dbdd1949645da810ffb2f0bbcd5ce3c6f201156c823253abee955413d7aad48d",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/low_nebula.png",
+    "image": "assets/scenes/low_nebula-full-v1.png",
+    "sha256": "73f8d5cd56482c6642486059e28a300b514a455cfef09965f6f65b8d869bfc61",
+    "pixelSha256": "f02c2ab6b48c53416dd293a8acffac8eb80f21f284fd9347b0be4b48e9cac253",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/low_storm.png",
+    "image": "assets/scenes/low_storm-full-v1.png",
+    "sha256": "db686eec97a4d6d198baa95cb746a1ad894aadc7e5b809e2e4264e4e40a6dbdd",
+    "pixelSha256": "ded22de87ad77942f2c6f2a0579a21d86cc22fcfd43555450df5e887e7ffc9a6",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/low_asteroid.png",
+    "image": "assets/scenes/low_asteroid-full-v3.png",
+    "sha256": "373a3de545ddd60f83c74e3f1afc07837c0feae82759b76c33dd68f1953e006d",
+    "pixelSha256": "59e4f2e342efe35b5865da061b6166d947db3919c2f5295c41cea3c144339380",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/low_pulsar.png",
+    "image": "assets/scenes/low_pulsar-full-v1.png",
+    "sha256": "2c90f4bf7273a1b3fcb4fc392b05e6761b494d0a27571afcd94eb7b1783728c1",
+    "pixelSha256": "dd882571e0c3955bf927c0a5e3bb38ab8e67b05cc5886103631de89dc91dc1be",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  },
+  {
+    "source": "img/stars/low_sun.png",
+    "image": "assets/scenes/low_sun-full-v1.png",
+    "sha256": "b2177ba5a17fefbe914209ab4468497db798e8a6504b8c189c7ce08391d77ff8",
+    "pixelSha256": "b97f0b16880968fb43e639c2e992629adf1691347287018135029610d16375e1",
+    "provenance": "Complete ImageGen scene; whole-frame fit; human reviewed; style/context reference only"
+  }
+]

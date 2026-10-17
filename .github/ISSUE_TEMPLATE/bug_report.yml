@@ -1,0 +1,22 @@
+name: Beta bug report
+description: Report a reproducible display, input or installation problem
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: Display and software
+      description: Resolution, Windows scaling, GPU, Windows version, FTL/Hyperspace versions, mod version, display mode and low-end graphics setting.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: What happened, and how can we reproduce it?
+      description: Include expected behavior, steps and a screenshot if useful. Never upload game archives, executables, entire save folders or private information.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Selected sanitized log excerpts
+      description: Relevant errors from ultrawide-launch.log or FTL_HS.log only; remove private paths or identifiers.

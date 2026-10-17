@@ -1,0 +1,25 @@
+# Public repository allowlist. Private development material stays local.
+/*
+!/.gitignore
+!/README.md
+!/LICENSE
+!/CREDITS.md
+!/CHANGELOG.md
+!/docs/
+!/native/
+!/release/
+!/.github/
+**/__pycache__/
+/release/bin/
+/release/_test/
+/release/_work/
+/release/dependencies/
+/release/dist/
+*.sav
+*.log
+*.bak
+*.exe
+*.dll
+ftl.dat*
+settings.ini
+ultrawide-runtime.cfg

@@ -1,0 +1,16 @@
+<mod:findName type="text" name="fullscreen">
+    <mod:setValue>\1 (restart to apply)</mod:setValue>
+</mod:findName>
+<mod:findName type="text" name="fullscreen_0">
+    <mod:setValue>Windowed</mod:setValue>
+</mod:findName>
+<mod:findName type="text" name="fullscreen_1">
+    <mod:setValue>Fullscreen (Classic)</mod:setValue>
+</mod:findName>
+<mod:findName type="text" name="fullscreen_2">
+    <mod:setValue>Fullscreen (Unscaled)</mod:setValue>
+</mod:findName>
+<mod:findName type="text" name="fullscreen_3">
+    <mod:setValue>Fullscreen (Native)</mod:setValue>
+</mod:findName>
+<text name="fullscreen_4">Fullscreen (Modded)</text>

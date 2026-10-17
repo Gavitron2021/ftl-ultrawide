@@ -1,0 +1,38 @@
+{
+  "highres": {
+    "filename": "HighRes_Backgrounds_and_Planets_2.0.ftl",
+    "sha256": "59d32f4e45cfd629c478293e604b2d1243fcba1db9cedad850dba619b94a94e7"
+  },
+  "asteroids": {
+    "filename": "better_asteroids.ftl",
+    "sha256": "ea9269b7a7c7c50a3d883ef674d045a67dc484339b8d5a62d79fd4c278489b3d"
+  },
+  "shiny": {
+    "filename": "Shiny_UI_and_Graphics_v1.0_Vanilla.ftl",
+    "sha256": "c69210c85f544c57f9884eb95bc832dd34b9d8b3ca123b1716850a9120cadc2a"
+  },
+  "combat": {
+    "filename": "Shiny_Combat_UI_2.0.ftl",
+    "sha256": "ff3994677fd3e2087fa2a8545063c959acfd2ad92e1ebd2fdada80d6e30a510f"
+  },
+  "hyperspace_mod": {
+    "filename": "Hyperspace.ftl",
+    "sha256": "fa8205d5be603a4f01e1fc081097d1cb24b5a13588e403e65e6ff3a4f5173fa8"
+  },
+  "hyperspace_dll": {
+    "filename": "Hyperspace.dll",
+    "sha256": "359b9ac44a09fc2863dcf27c3163bf3c60f2895afa0809ca09b312debd4af4b2"
+  },
+  "proxy": {
+    "filename": "xinput1_4.dll",
+    "sha256": "87695b3b80a1d712d2f7e04f0a43ae95418378ddd957524842135c3f626c41cf"
+  },
+  "rollback": {
+    "filename": "Steam-1.6.14.bps",
+    "sha256": "a1b70589c0614ee9aa9c1acd55af527bbec10f3e7af4640579b03ced0bd69f52"
+  },
+  "ftlman": {
+    "filename": "ftlman.exe",
+    "sha256": "07026ca5ca86d6489072c92d5fc09395e373a716d713c7a75cb7c18ba3fc0a1b"
+  }
+}

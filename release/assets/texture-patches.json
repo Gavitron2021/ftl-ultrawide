@@ -1,0 +1,86 @@
+[
+  {
+    "sourceKind": "highres",
+    "source": "img/main_menus/main_base2.png",
+    "sourceSha256": "010ca6fffa61aa2e717a9a9a246cccd6ba75023d8134a4a6d41e45491762bc60",
+    "method": "menu",
+    "target": "img/ultrawide/title-under-flare-v12.png",
+    "dimensions": [
+      1720,
+      720
+    ],
+    "pixelSha256": "6b84417348e1f7807744155e3e2b3c63dc634e6457b44f14353e800757a737ad",
+    "delta": "assets/texture-patches/main_base2.delta",
+    "deltaSha256": "a2e0a6339ee7f09caed1015433ee42ec750c704c43a1330a2fc3c34fb77d2d29"
+  },
+  {
+    "sourceKind": "vanilla",
+    "source": "img/customizeUI/custom_background.png",
+    "sourceSha256": "4b9ef73efe8238c13f2f7f800bc17ed353a1271294bc528be6945fc7b9d6e3c5",
+    "method": "menu",
+    "target": "img/ultrawide/hangar-native-rails-v4.png",
+    "dimensions": [
+      1720,
+      720
+    ],
+    "pixelSha256": "2d246c299e69146582795e0f93f81fa2553374347fd1e4e45b5fd6a6f96c9fb9",
+    "delta": "assets/texture-patches/custom_background.delta",
+    "deltaSha256": "ded77182d082a80d6d5315a579373fec54bb184accb6045fb7280798f1d170ab"
+  },
+  {
+    "sourceKind": "highres",
+    "source": "img/stars/nebula_large_a.png",
+    "sourceSha256": "d5e0108f528477c1dd1cc601c8d16b801525c4d6efeac4f6143a39a1676ebb00",
+    "method": "nearest4",
+    "target": "img/stars/nebula_large_a.png",
+    "dimensions": [
+      796,
+      620
+    ],
+    "pixelSha256": "1801b59828b4b5fd12c93bf7d94a951a7e48a87376248f96d3170d56e8bbcbf5",
+    "delta": "assets/texture-patches/nebula_large_a.delta",
+    "deltaSha256": "2619e7f7b61392d9c9d6c7aaf86bab6791eb5f37a93350cf948927709649e011"
+  },
+  {
+    "sourceKind": "highres",
+    "source": "img/stars/nebula_large_b.png",
+    "sourceSha256": "726be59999473c4b1eaece28446d40fd220f1856ed72a27932e33b386ff204aa",
+    "method": "nearest4",
+    "target": "img/stars/nebula_large_b.png",
+    "dimensions": [
+      796,
+      620
+    ],
+    "pixelSha256": "b36dbaf16284ff58e812fc5ffddf37c6bc40f2813ce7e109bd4cf1714c671e8a",
+    "delta": "assets/texture-patches/nebula_large_b.delta",
+    "deltaSha256": "667a9fc63ddcf4edb7c0940717393c8b824a4f66a3008cc1325259d25916c4e1"
+  },
+  {
+    "sourceKind": "highres",
+    "source": "img/stars/nebula_large_c.png",
+    "sourceSha256": "be5f8926ced690453ebeedc6a868fc57ab9195ba6b6af60cfbceea6480e8f104",
+    "method": "nearest4",
+    "target": "img/stars/nebula_large_c.png",
+    "dimensions": [
+      796,
+      620
+    ],
+    "pixelSha256": "95496c701752cedaaad5880f29510b7e14578d944739cfb6bfb95f470848d4b5",
+    "delta": "assets/texture-patches/nebula_large_c.delta",
+    "deltaSha256": "2e5af410ba21082ba334e1c8c6154ad591f330d8d415643e2d9544a8a253e196"
+  },
+  {
+    "sourceKind": "asteroids",
+    "source": "img/stars/lightning.png",
+    "sourceSha256": "67b7a115d961a52862fcae983d329263bafead9161c5ac5161123a332a3d2d4f",
+    "method": "nearest4",
+    "target": "img/stars/lightning.png",
+    "dimensions": [
+      680,
+      1240
+    ],
+    "pixelSha256": "bce732aeeef7096248ee10791dd77ce6edc8ea9cccce22594642d301cf8c3959",
+    "delta": "assets/texture-patches/lightning.delta",
+    "deltaSha256": "869e8c4c11cef5df19d9c0918b05c0f3865b8b92e1bb2410e042bdd342975bce"
+  }
+]
