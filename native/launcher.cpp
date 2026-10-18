@@ -120,6 +120,7 @@ static void prepareHyperspace(const fs::path& directory, int width, uintptr_t to
 }
 
 #include "ui-layout.h"
+#include "borderless.h"
 #include "hangar-path.h"
 #include "hazard-flashes.h"
 #include "credits-background.h"
@@ -153,15 +154,17 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         for (int i = 1; i < argc; ++i) {
             if (std::wstring(argv[i]) == L"--wide") { mode = 4; setMode(directory / L"settings.ini", mode); }
             else if (std::wstring(argv[i]) == L"--classic") { mode = 1; setMode(directory / L"settings.ini", mode); }
+            else if (std::wstring(argv[i]) == L"--borderless") { mode = 5; setMode(directory / L"settings.ini", mode); }
             else if (std::wstring(argv[i]) == L"--trace") trace = true;
-            else fail("Supported launcher arguments: --wide, --classic, --trace");
+            else fail("Supported launcher arguments: --wide, --borderless, --classic, --trace");
         }
         LocalFree(argv);
         if (mode == 2 || mode == 3) { mode = 1; setMode(directory / L"settings.ini", mode); }
         DEVMODEW display{};
         display.dmSize = sizeof(display);
         if (!EnumDisplaySettingsW(nullptr, ENUM_CURRENT_SETTINGS, &display)) fail("Cannot read primary display size");
-        const bool wide = mode == 4;
+        const bool borderless = mode == 5;
+        const bool wide = mode == 4 || borderless;
         int width = wide ? static_cast<int>(720.0 * display.dmPelsWidth / display.dmPelsHeight + 0.5) : 1280;
         if (width < 1280 || width > 4096) fail("Unsupported desktop aspect ratio for FTL Ultrawide");
         // The approved scenery and hangar route cover precisely 1720x720.
@@ -199,8 +202,9 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         prepareHyperspace(directory,width,tooltipBounds);
 
         // Add Modded to the verified Windowed / Classic display cycle.
-        patch<uint8_t>(child.hProcess, base, 0x18144f, 3, 4);
+        patch<uint8_t>(child.hProcess, base, 0x18144f, 3, 5);
         installDisplayChoices(child.hProcess, base, mode);
+        if (borderless) installBorderlessDesktop(child.hProcess,base);
         if (wide) {
             // Enable framebuffer scaling for the new enum value 4.
             patch<uint8_t>(child.hProcess, base, 0x2f65, 1, 4);

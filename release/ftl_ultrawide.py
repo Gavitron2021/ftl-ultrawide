@@ -28,7 +28,7 @@ PAYLOAD = {'FTLGame.exe', 'FTL-Ultrawide.exe', 'FTLGame-1.6.9.exe', 'ftl.dat',
            'Hyperspace.classic.dll', 'Hyperspace.dll', 'xinput1_4.dll',
            'settings.ini', 'ultrawide-runtime.cfg', 'steam_appid.txt'}
 MUTABLE = {'settings.ini', 'Hyperspace.dll', 'ultrawide-runtime.cfg'}
-VERSION = '0.1.0-beta.4'
+VERSION = '0.1.0-beta.5'
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -242,6 +242,9 @@ def verify_archive(path, original):
     config=ET.fromstring(archive.read('data/hyperspace.xml'))
     require(config.findtext('saveFile/prefix')=='ultrawide' and config.findtext('saveFile/inheritMode')=='0','Production profile import is not enabled')
     require(config.find('console').get('enabled')=='false','Developer console must be disabled')
+    labels=ET.fromstring(archive.read('data/text_misc.xml'))
+    require(labels.findtext("text[@name='fullscreen_5']")=='Borderless (Modded)',
+            'Borderless display option label is missing')
     lua=archive.read('data/ultrawide.lua')
     require(all(x not in lua for x in [b'F9',b'review.active',b'UW_QA',b'io.open(\'ultrawide-art.log']), 'Testing artifacts found')
     for name in read_json(ROOT/'native-ui-fallbacks.json')['files']:
@@ -262,7 +265,7 @@ def verify_archive(path, original):
     return {'scenes':31,'texturePatches':6,'baseSpritePathsUnchanged':checked,
             'nativeUiFallbacks':len(read_json(ROOT/'native-ui-fallbacks.json')['files']),
             'profilePrefix':'ultrawide','vanillaProfileInheritance':True,
-            'developerConsole':False,'artworkReviewRemoved':True}
+            'developerConsole':False,'artworkReviewRemoved':True,'borderlessOption':True}
 
 def build(args):
     game=Path(args.game_dir).resolve(); out=Path(args.out).resolve()

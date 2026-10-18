@@ -14,3 +14,4 @@
     <mod:setValue>Fullscreen (Native)</mod:setValue>
 </mod:findName>
 <text name="fullscreen_4">Fullscreen (Modded)</text>
+<text name="fullscreen_5">Borderless (Modded)</text>

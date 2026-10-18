@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-beta.5
+
+- Add Borderless (Modded) to the display cycle and `--borderless` to the launcher. The saved choice applies on restart.
+- Keep the existing ultrawide renderer at the exact desktop size, preserve desktop refresh, and disable automatic minimization on focus loss in Borderless mode.
+- Preserve the current display preference during updates; defaults and other display modes remain unchanged.
+
 ## 0.1.0-beta.4
 
 - Hide reactor column price labels in every display mode; capacity, next cost, queued upgrades and MAX remain visible. Upgrade and refund calculations are unchanged.

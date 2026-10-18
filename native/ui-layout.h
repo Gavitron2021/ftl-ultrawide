@@ -60,7 +60,9 @@ static void installDisplayChoices(HANDLE process, uintptr_t base, int mode) {
     auto active = reinterpret_cast<uintptr_t>(VirtualAllocEx(process, nullptr, 4,
         MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
     if (!active) fail("Cannot allocate active display mode");
-    writeMemory(process, active, mode);
+    // Borderless is a presentation choice over the existing Modded renderer.
+    // Keep the native render paths on their already-verified mode value.
+    writeMemory(process, active, mode==5 ? 4 : mode);
     for (auto rva : {0x15d5u,0x1611u,0x1667u,0x1686u,0x2a47u,0x2a5fu,
                      0x2b0bu,0x2b65u,0x2c24u,0x2e37u,0x3669u,0x2f61u,0x2e22u,0x2e79u}) {
         uint32_t preferred = (rva == 0x2f61 || rva == 0x2e22 || rva == 0x2e79) ? 0x8c8ca4 : 0x8c8ca0;
@@ -71,7 +73,7 @@ static void installDisplayChoices(HANDLE process, uintptr_t base, int mode) {
         writeMemory(process, base + rva, static_cast<uint32_t>(active - (pending ? delta : 0)));
     }
     RemoteCode code(process);
-    // Cycle Windowed -> Classic -> Modded -> Windowed. The unscaled/native
+    // Cycle Windowed -> Classic -> Modded -> Borderless -> Windowed. The unscaled/native
     // variants fail the user's display requirements and remain out of the UI.
     code.emit({0x83,0xf8,0x02}); code.branch(0x84,"choose-wide");
     code.emit({0x83,0xf8,0x03}); code.branch(0x85,"save-choice");

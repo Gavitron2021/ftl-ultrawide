@@ -1,6 +1,6 @@
 # Compatibility
 
-The launcher reads the **primary Windows desktop resolution**, then calculates `round(720 × desktop_width / desktop_height)`. Modded mode in this beta requires a logical width of **1720**: the approved art and hangar route were built for precisely 1720×720. Set the target monitor as primary before launching. Moving monitors or changing the desktop resolution while running is unvalidated; restart after changes.
+The launcher reads the **primary Windows desktop resolution**, then calculates `round(720 × desktop_width / desktop_height)`. Fullscreen (Modded) and Borderless (Modded) in this beta require a logical width of **1720**: the approved art and hangar route were built for precisely 1720×720. Set the target monitor as primary before launching. Moving monitors or changing the desktop resolution while running is unvalidated; restart after changes.
 
 | Desktop resolution | Logical width | Modded mode | Evidence |
 | --- | ---: | --- | --- |
@@ -24,6 +24,8 @@ Higher resolution at the same ratio means **uniform scaling**, not horizontal di
 - Presentation changes are intended; Hyperspace has engine fixes/features of its own. Configurable behavior was reduced toward vanilla, but exact vanilla equivalence is not guaranteed.
 
 ## Test scope
+
+Beta.5 adds the Borderless option at the same supported ratio. It uses the Modded renderer; desktop size/refresh and focus switching were checked at 3440x1440. See [Borderless implementation and limits](BORDERLESS.md).
 
 Beta.4 additionally checks hidden reactor column labels, the 8-to-11 capacity price boundary (65 scrap), complete Undo refund, final 24-to-25 purchase and MAX, plus store Buy pages and Sell-tab Close hover/click. Modded 3440x1440 and Windowed 1280x720 were checked; outside/inside Close-edge clicks were checked in Windowed mode. The Classic layout shares the 1280-wide renderer but was not replayed for beta.4.
 

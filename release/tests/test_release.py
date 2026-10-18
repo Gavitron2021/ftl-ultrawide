@@ -168,6 +168,14 @@ class InstallerTests(unittest.TestCase):
         with self.assertRaises(ValueError):uw.install(args)
         self.assertEqual(len(list(self.game.glob('ftl-ultrawide-backup-*'))),count)
 
+    def test_borderless_preference_survives_update(self):
+        args=self.prepare_update()
+        settings=b'fullscreen=5\nlast_fullscreen=5\nmusic=37\ncustom=preserved\n'
+        (self.game/'settings.ini').write_bytes(settings)
+        uw.write_json(args.expected_current,uw.inventory(self.game))
+        uw.install(args)
+        self.assertEqual((self.game/'settings.ini').read_bytes(),settings)
+
     def test_update_copy_failure_restores_current_modded_files(self):
         args=self.prepare_update()
         before={n:(self.game/n).read_bytes() for n in uw.PAYLOAD}

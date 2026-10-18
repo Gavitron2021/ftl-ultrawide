@@ -6,7 +6,7 @@ If an agent or LLM is helping, use the **[copyable setup and installation prompt
 
 ## Downloads
 
-Extract **FTL-Ultrawide-0.1.0-beta.4.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.4) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
+Extract **FTL-Ultrawide-0.1.0-beta.5.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.5) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
 
 Obtain these exact files from their authors and place/extract them under one dependency directory, e.g. `C:\FTL-Mod-Dependencies`. Subdirectories are searched; all inputs are SHA-256 checked against [`release/dependencies.json`](../release/dependencies.json).
 
@@ -57,7 +57,7 @@ Installation verifies the payload and unchanged game baseline, checks affected f
 
 Windows' Documents known folder, including redirected Documents, is resolved automatically. Optional `--save-dir` supplies a nonstandard save location. Write access to the game folder is needed; the installer does not impose a general administrator requirement.
 
-Launch with **Steam Play**. Modded mode is initially selected. Options cycles Windowed / Fullscreen (Classic) / Fullscreen (Modded); **restart to apply**. Classic preserves the original aspect ratio with side bars. To recover from an unsupported-ratio error, run `FTL-Ultrawide.exe --classic` from the game folder.
+Launch with **Steam Play**. Modded mode is initially selected. Options cycles Windowed / Fullscreen (Classic) / Fullscreen (Modded) / Borderless (Modded); **restart to apply**. Borderless uses the same supported ultrawide layout at the exact primary desktop size and stays open when switching apps; select it and restart. Classic preserves the original aspect ratio with side bars. See [Borderless details](BORDERLESS.md). To recover from an unsupported-ratio error, run `FTL-Ultrawide.exe --classic` from the game folder.
 
 ## Update an existing modded installation
 
