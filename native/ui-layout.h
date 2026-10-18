@@ -143,7 +143,7 @@ static void installDisplayChoices(HANDLE process, uintptr_t base, int mode) {
     logFile << "Display changes deferred until restart; native warning enabled\n";
 }
 
-static void installUiLayout(HANDLE process, uintptr_t base, int width) {
+static void installUiLayout(HANDLE process, uintptr_t base, int width, uintptr_t tooltipBounds) {
     const uint32_t padding = (width - 1280) / 2;
     auto state = reinterpret_cast<uintptr_t>(VirtualAllocEx(process, nullptr, 8,
         MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
@@ -151,6 +151,15 @@ static void installUiLayout(HANDLE process, uintptr_t base, int width) {
     RemoteCode code(process);
     const auto settingsStub = code.here();
     code.emit({0xf3,0x0f,0x11,0x81,0x04,0x35,0x00,0x00,0x60}); // original store; pushad
+    auto setTooltipBounds = [&](int translation) {
+        for (auto item:std::array<std::pair<uintptr_t,float>,2>{{
+            {tooltipBounds,static_cast<float>(width-translation-20)},
+            {tooltipBounds+4,-static_cast<float>(width-translation-40)}}}) {
+            uint32_t bits=0; memcpy(&bits,&item.second,4);
+            code.emit({0xc7,0x05}); code.u32(item.first); code.u32(bits);
+        }
+    };
+    setTooltipBounds(0);
     code.emit({0xc6,0x05}); code.u32(state); code.emit({0x00});
     code.emit({0x80,0x79,0x10,0x00}); code.branch(0x85,"main-menu");
     code.emit({0x8b,0x41,0x08,0x85,0xc0}); code.branch(0x84,"settings-done");
@@ -159,9 +168,10 @@ static void installUiLayout(HANDLE process, uintptr_t base, int width) {
     code.emit({0x39,0xfe}); code.branch(0x83,"settings-done");
     code.emit({0x8b,0x06,0x83,0xc6,0x04,0x85,0xc0}); code.branch(0x84,"focus-loop");
     code.emit({0x80,0x78,0x04,0x00}); code.branch(0x84,"focus-loop");
-    code.emit({0xc6,0x05}); code.u32(state); code.emit({0x01}); code.jump("settings-done");
+    code.emit({0xc6,0x05}); code.u32(state); code.emit({0x01}); code.jump("translated-tooltip");
     code.label("main-menu");
     code.emit({0xc7,0x81,0xec,0x34,0x00,0x00}); code.u32(padding);
+    code.label("translated-tooltip"); setTooltipBounds(padding);
     code.label("settings-done"); code.emit({0x61,0xc3});
 
     // Translate only input while a game focus window is open. World rendering

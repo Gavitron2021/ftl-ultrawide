@@ -6,7 +6,7 @@ If an agent or LLM is helping, use the **[copyable setup and installation prompt
 
 ## Downloads
 
-Extract **FTL-Ultrawide-0.1.0-beta.2.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
+Extract **FTL-Ultrawide-0.1.0-beta.3.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.3) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
 
 Obtain these exact files from their authors and place/extract them under one dependency directory, e.g. `C:\FTL-Mod-Dependencies`. Subdirectories are searched; all inputs are SHA-256 checked against [`release/dependencies.json`](../release/dependencies.json).
 
@@ -59,6 +59,21 @@ Windows' Documents known folder, including redirected Documents, is resolved aut
 
 Launch with **Steam Play**. Modded mode is initially selected. Options cycles Windowed / Fullscreen (Classic) / Fullscreen (Modded); **restart to apply**. Classic preserves the original aspect ratio with side bars. To recover from an unsupported-ratio error, run `FTL-Ultrawide.exe --classic` from the game folder.
 
+## Update an existing modded installation
+
+Close FTL. Build the new version from a **separate verified pristine game backup**, using the build command above with that backup as `--game-dir`. Never build from the live modded archive. Keep the original vanilla rollback backup.
+
+Record the current installation for review, then update from the new private build:
+
+```powershell
+.\.venv\Scripts\python.exe .\release\ftl_ultrawide.py inventory --game-dir "C:\Games\FTL" --out "C:\FTL-current-files.json"
+.\.venv\Scripts\python.exe .\release\ftl_ultrawide.py update --game-dir "C:\Games\FTL" --build "C:\FTL-Ultrawide-Local-Build" --expected-current "C:\FTL-current-files.json"
+```
+
+Substitute your actual game/build paths. Review the inventory's game directory and file hashes before updating. The command refuses any change since that inventory, requires the pinned native executable/DLL baseline and production `ultrawide` / `inheritMode=0` configuration, and validates every new payload hash. It backs up **current** modded files and all current saves, then copies only changed production files. Settings, display mode and generated runtime files are preserved; the launcher regenerates the active Hyperspace DLL at the next launch. No previous save/profile is imported over existing progress.
+
+Use the printed `restore --backup` command to roll back this update to the immediately preceding modded installation. It never restores saves. The earlier vanilla backup remains the route back to vanilla. Local inventories/builds/backups contain private paths or owned files; do not upload them.
+
 ## Saves
 
 Check Stats and ship unlocks immediately after first launch. Original **`ae_prof.sav` remains unchanged**. Hyperspace imports its ships, achievements and statistics into **`hs_ultrawide_prof.sav`** when the production profile is first created. An existing production profile is reused, not continuously overwritten from vanilla. New progress does not automatically sync back to vanilla. Migration of an active vanilla Continue run is not guaranteed.
@@ -75,7 +90,7 @@ Close FTL and use the exact backup path printed by installation:
 
 Restoration verifies backup hashes, restores replaced files and removes only recorded additions. **It never restores/overwrites/deletes saves.** Backup and normal diagnostic logs remain. Unexpectedly changed added files are refused for inspection; settings, the generated active Hyperspace DLL and runtime configuration are expected to change during play.
 
-Restore before returning to vanilla or using Steam Verify Integrity. Updates/Verify can replace the launcher/archive. Restore before installing another version; do not layer public installations.
+Restore before returning to vanilla or using Steam Verify Integrity. Updates/Verify can replace the launcher/archive. Use the guarded update route above for a version update, or restore before a fresh installation; do not layer fresh installations.
 
 ## Troubleshooting
 

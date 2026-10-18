@@ -91,7 +91,8 @@ static void setMode(const fs::path& path, int mode) {
     if (!output) fail("Cannot update the display setting");
 }
 
-static void prepareHyperspace(const fs::path& directory, int width) {
+#include "hyperspace-ui.h"
+static void prepareHyperspace(const fs::path& directory, int width, uintptr_t tooltipBounds) {
     const auto baseline = directory / L"Hyperspace.classic.dll";
     if (hashFile(baseline) != "e61145d7b7c18a33c738305bece9445b09d4f86d925a36b7cceeecdaf0cf4697")
         fail("Hyperspace baseline does not match the verified renderer/logger fixes");
@@ -112,6 +113,7 @@ static void prepareHyperspace(const fs::path& directory, int width) {
         if (anchor!=1207) fail("Unexpected Hyperspace information button anchor");
         anchor += width-1280; memcpy(bytes.data()+offset,&anchor,4);
     }
+    patchHyperspaceUi(bytes,width,tooltipBounds);
     std::ofstream output(directory / L"Hyperspace.dll", std::ios::binary | std::ios::trunc);
     output.write(bytes.data(), bytes.size());
     if (!output) fail("Cannot prepare Hyperspace; close any previous FTL test instance");
@@ -169,7 +171,6 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             fail("This beta's Modded mode requires the 3440x1440 aspect ratio (43:18). Higher resolutions at that same ratio can scale, but are untested. Use --classic for other aspect ratios.");
         logFile << "mode=" << mode << " desktop=" << display.dmPelsWidth << 'x' << display.dmPelsHeight
                 << " logical=" << width << "x720\n";
-        prepareHyperspace(directory, width);
 
         // Create only our own verified game process, suspended before its entry
         // point. Patches affect this child process; the executable on disk stays
@@ -188,6 +189,14 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         const uintptr_t base = readMemory<uint32_t>(child.hProcess, context.Ebx + 8);
         if (readMemory<uint16_t>(child.hProcess, base) != 0x5a4d) fail("Invalid child image base");
         logFile << "image base=0x" << std::hex << base << std::dec << '\n';
+        auto tooltipBounds=reinterpret_cast<uintptr_t>(VirtualAllocEx(child.hProcess,nullptr,8,
+            MEM_COMMIT | MEM_RESERVE,PAGE_READWRITE));
+        if (!tooltipBounds) fail("Cannot allocate tooltip viewport bounds");
+        writeMemory<float>(child.hProcess,tooltipBounds,static_cast<float>(width-20));
+        writeMemory<float>(child.hProcess,tooltipBounds+4,-static_cast<float>(width-40));
+        // The child is still suspended before DLL initialization. Build its
+        // active DLL with guarded operands referencing this child's allocation.
+        prepareHyperspace(directory,width,tooltipBounds);
 
         // Add Modded to the verified Windowed / Classic display cycle.
         patch<uint8_t>(child.hProcess, base, 0x18144f, 3, 4);
@@ -234,7 +243,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             if (display.dmPelsWidth % width == 0 && display.dmPelsHeight % 720 == 0)
                 patch<uint8_t>(child.hProcess, base, 0x3310, 0x74, 0xeb);
 
-            installUiLayout(child.hProcess, base, width);
+            installUiLayout(child.hProcess, base, width, tooltipBounds);
             installHangarPath(child.hProcess,base,width);
             installHazardFlashes(child.hProcess,base,width);
             installCreditsBackground(child.hProcess,base,width);

@@ -4,7 +4,7 @@ Use these prompts with an agent that can read local files and run Windows comman
 
 The first prompt prepares and verifies a **local build**. The second authorizes installation of that build. This separation gives you a concrete result to review before changing Steam's game files. If you have already explicitly authorized installation in your agent session, that authorization can cover the second phase; there is no need to request it again.
 
-The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware testing; see [the display table](COMPATIBILITY.md). Older beta ZIPs retain the documentation originally packaged with them; this page is the current repository guidance for the beta.2 tools.
+The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware testing; see [the display table](COMPATIBILITY.md). Older beta ZIPs retain the documentation originally packaged with them; this page is the current repository guidance for the beta.3 tools.
 
 ## 1. Copyable preparation prompt
 
@@ -12,8 +12,8 @@ The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware
 Help me prepare FTL Ultrawide using its documented public beta tools.
 
 Project: https://github.com/Gavitron2021/ftl-ultrawide
-Release: v0.1.0-beta.2
-Release page: https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.2
+Release: v0.1.0-beta.3
+Release page: https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.3
 Current install guide: https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md
 
 My setup:
@@ -105,7 +105,7 @@ The official download section is [here](INSTALL.md#downloads). An inaccessible a
 After reviewing a successful prepared build, use this prompt if you want the agent to install it:
 
 ```text
-Install the verified FTL Ultrawide beta.2 build we prepared.
+Install the verified FTL Ultrawide beta.3 build we prepared.
 
 - FTL game directory: [same absolute path used for preparation]
 - Verified local build directory: [absolute path containing build.json/payload]
@@ -145,5 +145,7 @@ installation check.
 ```
 
 ## What to expect
+
+For an already-modded production copy, use [the update procedure](INSTALL.md#update-an-existing-modded-installation). The fresh-install prompt above expects a pristine target. An update builds from a separate pristine backup, reviews a current inventory, preserves current saves/settings and retains the original vanilla rollback.
 
 A useful completion report identifies the exact build/installation path, pinned input versions, passed verification, actual backup/restore command and what remains untested. It should not claim success based solely on copying files or seeing the title screen. If original unlocks/statistics appear wrong, close the game and preserve the source/current profiles before investigating; the installer does not delete or replace them.

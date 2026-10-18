@@ -127,4 +127,57 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('music=37',configured); self.assertNotIn('manual=1',configured)
         self.assertEqual(configured.count('screen_x=0'),2); self.assertIn('fullscreen=4',configured)
 
+    def prepare_update(self):
+        self.install()
+        (self.saves/'hs_ultrawide_continue.sav').write_bytes(b'current campaign')
+        (self.saves/'hs_ultrawide_prof.sav').write_bytes(b'current earned progress')
+        (self.game/'settings.ini').write_text('fullscreen=0\nmusic=37\ncustom=preserved\n')
+        (self.game/'Hyperspace.dll').write_bytes(b'current runtime dll')
+        def current(game):
+            return {'gameDirectory':str(game.resolve()),'files':{n:uw.file_hash(game/n) for n in sorted(uw.PAYLOAD)}}
+        expected=self.root/'current.json';uw.write_json(expected,current(self.game))
+        for name in ['FTLGame.exe','FTL-Ultrawide.exe','ftl.dat']:
+            (self.payload/name).write_bytes(('beta3 '+name).encode())
+        report=uw.read_json(self.build/'build.json')
+        report['files']={p.name:uw.file_hash(p) for p in self.payload.iterdir()}
+        uw.write_json(self.build/'build.json',report)
+        args=argparse.Namespace(command='update',game_dir=self.game,build=self.build,
+                                save_dir=self.saves,expected_current=expected)
+        self.stack.enter_context(patch.object(uw,'inventory',side_effect=current))
+        return args
+
+    def test_update_and_rollback_keep_current_campaign_progress_and_settings(self):
+        args=self.prepare_update()
+        before={n:(self.game/n).read_bytes() for n in uw.PAYLOAD}
+        saves=uw.snapshots(self.saves)
+        uw.install(args)
+        backup=max(self.game.glob('ftl-ultrawide-backup-*'))
+        for name in uw.MUTABLE:self.assertEqual((self.game/name).read_bytes(),before[name])
+        self.assertEqual((self.game/'ftl.dat').read_bytes(),b'beta3 ftl.dat')
+        self.assertEqual(uw.snapshots(self.saves),saves)
+        self.assertEqual(uw.snapshots(backup/'saves'),saves)
+        (self.saves/'hs_ultrawide_prof.sav').write_bytes(b'even newer progress')
+        uw.restore_backup(backup)
+        for n,data in before.items():self.assertEqual((self.game/n).read_bytes(),data)
+        self.assertEqual((self.saves/'hs_ultrawide_prof.sav').read_bytes(),b'even newer progress')
+
+    def test_update_refuses_stale_inventory_before_backup(self):
+        args=self.prepare_update()
+        (self.game/'settings.ini').write_text('changed since review')
+        count=len(list(self.game.glob('ftl-ultrawide-backup-*')))
+        with self.assertRaises(ValueError):uw.install(args)
+        self.assertEqual(len(list(self.game.glob('ftl-ultrawide-backup-*'))),count)
+
+    def test_update_copy_failure_restores_current_modded_files(self):
+        args=self.prepare_update()
+        before={n:(self.game/n).read_bytes() for n in uw.PAYLOAD}
+        real=uw.shutil.copy2
+        def fail_once(source,destination,*a,**kw):
+            if Path(source).resolve()==(self.payload/'ftl.dat').resolve():raise OSError('interrupted update')
+            return real(source,destination,*a,**kw)
+        with patch.object(uw.shutil,'copy2',side_effect=fail_once):
+            with self.assertRaises(OSError):uw.install(args)
+        for n,data in before.items():self.assertEqual((self.game/n).read_bytes(),data)
+        self.assertEqual((self.saves/'hs_ultrawide_continue.sav').read_bytes(),b'current campaign')
+
 if __name__=='__main__':unittest.main()

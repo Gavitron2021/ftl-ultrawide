@@ -25,6 +25,8 @@ Higher resolution at the same ratio means **uniform scaling**, not horizontal di
 
 ## Test scope
 
+Beta.3 adds isolated verification of right-edge tooltips/clicks, reactor costs/capacity and queued/MAX states, ship Accept hover/click, a centered store, sensor reveal and two enemy weapon layouts, plus Classic/Windowed restarts. The installed production update is also checked through the actual Steam entry point with current progress retained. [UI causes and detailed scope](BUGFIX-NOTES.md).
+
 At 3440×1440: startup/loading, normal Steam entry behavior, main menu/Stats, title/hangar/ship list, selected shop pages and equipment displays, pause/modal darkening, selected combat/events, nebula/storm presentation including plasma storms, hazard flashes, Credits, normal shutdown and original vanilla profile import. Base ship/crew/weapon resource integrity was checked.
 
 **Not completed:** uninterrupted campaign through the flagship, every event/store transaction, every ship/layout, all languages, all GPUs/display modes, mixed-monitor/DPI combinations and overhaul compatibility. Public packaging adds a ratio guard and portable builder/installer; disposable-directory installation tests do not constitute a complete gameplay run.

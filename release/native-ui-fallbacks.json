@@ -1,0 +1,21 @@
+{
+  "reason": "Native label-free upgrade/reactor textures and the native Accept frame match current dynamic text and button geometry. Other selected Shiny resources remain enabled.",
+  "files": [
+    "img/upgradeUI/Equipment/equipment_reactor_off.png",
+    "img/upgradeUI/Equipment/equipment_reactor_on.png",
+    "img/upgradeUI/Equipment/equipment_reactor_select2.png",
+    "img/upgradeUI/upgrade_subsystem_bar_max_on.png",
+    "img/upgradeUI/upgrade_subsystem_bar_max_select2.png",
+    "img/upgradeUI/upgrade_subsystem_bar_none.png",
+    "img/upgradeUI/upgrade_subsystem_bar_off.png",
+    "img/upgradeUI/upgrade_subsystem_bar_on.png",
+    "img/upgradeUI/upgrade_subsystem_bar_select2.png",
+    "img/upgradeUI/upgrade_system_bar_max_on.png",
+    "img/upgradeUI/upgrade_system_bar_max_select2.png",
+    "img/upgradeUI/upgrade_system_bar_none.png",
+    "img/upgradeUI/upgrade_system_bar_off.png",
+    "img/upgradeUI/upgrade_system_bar_on.png",
+    "img/upgradeUI/upgrade_system_bar_select2.png",
+    "img/upgradeUI/buttons_accept_base.png"
+  ]
+}

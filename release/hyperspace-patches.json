@@ -27,5 +27,30 @@
     "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/v1.23.2/src/Global.cpp"
   },
   "reason": "The deprecated-flag substring check incorrectly matches the supported --force-opengl argument. This permits explicit OpenGL without the spurious startup dialog.",
-  "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/d5bf1270498291fe3bccf9c55822dc2da4f1a702/src/game/Utilities/Renderer.cpp"
+  "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/d5bf1270498291fe3bccf9c55822dc2da4f1a702/src/game/Utilities/Renderer.cpp",
+  "runtimeUi": {
+    "implementation": "native/hyperspace-ui.h",
+    "chargeBar": {
+      "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/v1.23.2/src/game/Gameplay/CustomWeapons.cpp",
+      "functionRva": "0x45b620",
+      "instructionFileOffsets": [
+        "0x45ac7e",
+        "0x45accb"
+      ],
+      "screenEdge": "logical width minus 7"
+    },
+    "tooltip": {
+      "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/v1.23.2/src/game/UserInterface/RedesignedTooltips.cpp",
+      "functionRva": "0x61c800",
+      "instructionFileOffsets": [
+        "0x61bef1",
+        "0x61bf11"
+      ],
+      "removedRelocationRvas": [
+        "0x61c8f4",
+        "0x61c915"
+      ],
+      "bounds": "Private child floats: width - current outer translation - 20, and -(width - current outer translation - 40). Classic and Windowed retain original operands."
+    }
+  }
 }

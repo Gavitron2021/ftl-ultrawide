@@ -9,7 +9,7 @@ FTL: Faster Than Light belongs to **Subset Games**. This is an unofficial fan mo
 | ftlman **0.7.4** | [afishhh and contributors](https://github.com/afishhh/ftlman/releases/tag/v0.7.4) | Separate download, operates on private build directory. |
 | HighRes Backgrounds & Planets **2.0** | [Ouaz and upstream artists](https://github.com/Ouaz/FTL-diversityMod#highres-backgrounds--planets-v20), [forum](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=30003) | Separate download; title/cloud sources and locally installed planets/image lists. |
 | Better Asteroids | **sanmonku**, as credited in its readme; [standalone author download](https://www.moddb.com/mods/better-planets-and-backgrounds/downloads/better-asteroids) | Separate download; asteroid resources and lightning patch input. |
-| Shiny! UI and Graphics **v1.0 Vanilla** | **Russian Rockman**, [author thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=25839) | Only the 794 compatible UI resource paths are extracted locally; excludes its ship/crew/weapon/scenery overrides. |
+| Shiny! UI and Graphics **v1.0 Vanilla** | **Russian Rockman**, [author thread](https://www.subsetgames.com/forum/viewtopic.php?f=11&t=25839) | Only the 778 compatible UI resource paths are extracted locally; excludes its ship/crew/weapon/scenery overrides. |
 | Shiny Combat UI **2.0** | **Ouaz**, based on Russian Rockman's UI, [author description](https://github.com/Ouaz/FTL-diversityMod#shiny-combat-ui-20) | Separate author download. |
 | 31 new gameplay panoramas | ImageGen output curated/reviewed for this project | Complete generated frames; existing scenery supplied style and encounter context. AI use does not establish exclusive rights or clear reference rights. |
 | Title/hangar additions and environment repairs | Generated detail and conventional source-based sampling/compositing | Source-dependent local texture deltas. Original centers/full original textures are not bundled. Derivative modifications do not grant rights over the source artwork. |
@@ -21,6 +21,8 @@ The HighRes project credits **Splette, Sanmonku, Scooterbaga, Russian Rockman, U
 `release/hyperspace-patches.json` publishes the hash-guarded recipe for the official 1.23.2 Windows DLL: correct the obsolete OpenGL-flag substring check; route cross-CRT `ftl_log` calls to the DLL-owned `hs_log_file` while retaining diagnostics; adjust only the six mouse-offset bytes in two CApp signatures. At launch the subsystem and Advanced Information anchors move with the wide canvas.
 
 The owned FTL 1.6.9 executable is verified then display-patched **in the suspended child process**, remaining unchanged on disk. Our launcher replaces Steam's entry executable and waits for the real game to exit.
+
+Beta.3 also guards the 1.23.2 `CustomWeapons.cpp` charge-bar edge instructions and `RedesignedTooltips.cpp` horizontal-bound operands. The latter refer to private child-process floats, adjusted for the current outer menu translation; their replaced DLL-relative relocations are removed with exact-target checks. `native/hyperspace-ui.h` contains the reconstruction logic. Native upgrade/reactor/button fallbacks are copied only from the player's owned archive, as listed in `release/native-ui-fallbacks.json`.
 
 ## Art provenance
 

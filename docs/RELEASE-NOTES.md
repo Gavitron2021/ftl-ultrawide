@@ -1,8 +1,10 @@
-# FTL Ultrawide 0.1.0-beta.2
+# FTL Ultrawide 0.1.0-beta.3
 
-Initial **Windows Steam base-game Advanced Edition** beta for **3440×1440 (43:18)**. Adds Modded fullscreen, side-aligned HUD, adapted menus/effects, 31 complete gameplay panoramas, repaired title/hangar additions and upgraded dynamic nebula/storm textures. Original ship/crew/weapon sprites are retained.
+Bug-fix update for the **Windows Steam base-game Advanced Edition** beta at **3440×1440 (43:18)**. Corrects right-side tooltip bounds, sensor-3 enemy charge indicators, duplicate upgrade/reactor lettering and the ship-menu Accept frame. Legitimate reactor column costs/capacity remain visible. Approved artwork and base gameplay sprites are retained.
 
-**Download `FTL-Ultrawide-0.1.0-beta.2.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
+Existing users can use the new [guarded update route](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md#update-an-existing-modded-installation): rebuild from pristine owned inputs, inventory the current modded copy, then update with current-file/save backups and settings preservation. Keep the earlier vanilla rollback backup. Do not rerun the fresh installer against a modded archive.
+
+**Download `FTL-Ultrawide-0.1.0-beta.3.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
 
 Current setup help: [visual mod download links](https://github.com/Gavitron2021/ftl-ultrawide#required-visual-mod-downloads) and [copyable agent / LLM preparation and installation prompts](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/AGENT-SETUP.md). These online guides supplement the documentation originally packaged in the beta ZIP.
 

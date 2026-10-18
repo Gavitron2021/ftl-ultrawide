@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.3
+
+- Right-side tooltips use the active viewport edge, accounting for the outer translation of centered menus; hover and click coordinates remain native.
+- Sensor-3 enemy weapon charge bars retain their ship/mount positions instead of clamping to the old 1280-wide edge.
+- Native label-free upgrade/reactor textures replace incompatible older overlays. Legitimate Hyperspace column costs, capacity, next cost and MAX labels remain dynamically rendered.
+- Restore the native ship-menu Accept frame used by the current text button.
+- Add a hash-checked update command for existing production installations, with current-file/save backups, settings preservation and rollback. Fresh builds still require pristine owned input.
+
 ## 0.1.0-beta.2
 
 - Corrected the interrupted-install test's comparison of Windows short and long path aliases on GitHub's clean runner. Product rendering and installation behavior are unchanged.

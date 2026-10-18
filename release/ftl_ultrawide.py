@@ -28,6 +28,7 @@ PAYLOAD = {'FTLGame.exe', 'FTL-Ultrawide.exe', 'FTLGame-1.6.9.exe', 'ftl.dat',
            'Hyperspace.classic.dll', 'Hyperspace.dll', 'xinput1_4.dll',
            'settings.ini', 'ultrawide-runtime.cfg', 'steam_appid.txt'}
 MUTABLE = {'settings.ini', 'Hyperspace.dll', 'ultrawide-runtime.cfg'}
+VERSION = '0.1.0-beta.3'
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -243,6 +244,8 @@ def verify_archive(path, original):
     require(config.find('console').get('enabled')=='false','Developer console must be disabled')
     lua=archive.read('data/ultrawide.lua')
     require(all(x not in lua for x in [b'F9',b'review.active',b'UW_QA',b'io.open(\'ultrawide-art.log']), 'Testing artifacts found')
+    for name in read_json(ROOT/'native-ui-fallbacks.json')['files']:
+        require(archive.read(name)==original.read(name),f'Incompatible UI overlay returned: {name}')
     for spec in read_json(ROOT/'assets/scenes.json'):
         full=Image.open(io.BytesIO(archive.read('img/ultrawide/'+Path(spec['image']).name))).convert('RGB')
         crop=Image.open(io.BytesIO(archive.read(spec['source']))).convert('RGB')
@@ -257,6 +260,7 @@ def verify_archive(path, original):
             require(archive.read(name)==original.read(name),f'Unexpected base sprite change: {name}')
             checked+=1
     return {'scenes':31,'texturePatches':6,'baseSpritePathsUnchanged':checked,
+            'nativeUiFallbacks':len(read_json(ROOT/'native-ui-fallbacks.json')['files']),
             'profilePrefix':'ultrawide','vanillaProfileInheritance':True,
             'developerConsole':False,'artworkReviewRemoved':True}
 
@@ -281,6 +285,11 @@ def build(args):
     mod=mods/'ultrawide'; shutil.copytree(ROOT/'mod',mod)
     vanilla=Archive(game/'ftl.dat')
     stage_art(mod,vanilla,deps)
+    # This final overlay also wins over any Hyperspace/Combat UI replacements.
+    # Copy owned native assets locally; never bundle them in the public package.
+    for name in read_json(ROOT/'native-ui-fallbacks.json')['files']:
+        target=local_path(mod,name);target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_bytes(vanilla.read(name))
     shiny=mods/'shiny-ui'; shiny.mkdir()
     with zipfile.ZipFile(deps['shiny']) as archive:
         for name in read_json(ROOT/'shiny-files.json'):
@@ -310,7 +319,7 @@ def build(args):
     # player's build only, and never belongs in the installation payload.
     if (payload/'ftl.dat.vanilla').exists():(payload/'ftl.dat.vanilla').unlink()
     require({p.name for p in payload.iterdir()}==PAYLOAD,'Unexpected build payload file')
-    write_json(out/'build.json',{'version':'0.1.0-beta.2','sourceExeSha256':file_hash(game/'FTLGame.exe'),
+    write_json(out/'build.json',{'version':VERSION,'sourceExeSha256':file_hash(game/'FTLGame.exe'),
                'sourceArchiveSha256':VANILLA_DAT,'verification':verification,
                'files':{p.name:file_hash(p) for p in sorted(payload.iterdir())}})
     print(json.dumps({'built':str(out),'verification':verification},indent=2))
@@ -346,8 +355,37 @@ def validate_install(build_dir,game):
     for name,expected in report['files'].items():
         require(file_hash(local_path(payload,name))==expected,f'Payload changed: {name}')
     require(file_hash(payload/'FTLGame-1.6.9.exe')==STEAM_169,'Native executable changed')
-    ensure_unlocked([game/name for name in PAYLOAD])
+    ensure_unlocked([local_path(game,name) for name in PAYLOAD])
     return report,payload
+
+def inventory(game):
+    """Record an already-modded copy for review and a later unchanged-state guard."""
+    game=Path(game).resolve()
+    ensure_unlocked([local_path(game,name) for name in PAYLOAD])
+    require(all((game/name).is_file() for name in PAYLOAD),'Incomplete modded installation')
+    require(file_hash(game/'FTLGame-1.6.9.exe')==STEAM_169,'Unsupported native executable')
+    recipe=read_json(ROOT/'hyperspace-patches.json')
+    require(file_hash(game/'Hyperspace.classic.dll')==recipe['patchedSha256'],'Unsupported Hyperspace baseline')
+    require(file_hash(game/'xinput1_4.dll')==read_json(ROOT/'dependencies.json')['proxy']['sha256'],'Unsupported proxy DLL')
+    config=ET.fromstring(Archive(game/'ftl.dat').read('data/hyperspace.xml'))
+    require(config.findtext('saveFile/prefix')=='ultrawide' and config.findtext('saveFile/inheritMode')=='0',
+            'Update requires the existing production ultrawide namespace and inheritMode 0')
+    require(config.find('console').get('enabled')=='false','Refusing a developer/QA installation')
+    require([n.text for n in config.findall('scripts/script')]==['data/ultrawide.lua'],'Unexpected production scripts')
+    return {'gameDirectory':str(game),'files':{n:file_hash(game/n) for n in sorted(PAYLOAD)}}
+
+def validate_update(build_dir,game,expected):
+    report=read_json(build_dir/'build.json');payload=build_dir/'payload'
+    require(set(report['files'])==PAYLOAD and report['sourceArchiveSha256']==VANILLA_DAT,'Invalid pristine-build manifest')
+    require(report['sourceExeSha256'] in (STEAM_169,STEAM_1614),'Unsupported build source')
+    for name,value in report['files'].items():
+        require(file_hash(local_path(payload,name))==value,f'Payload changed: {name}')
+    require(file_hash(payload/'FTLGame-1.6.9.exe')==STEAM_169,'Native executable changed')
+    require(inventory(game)==expected,'Installed files changed since inventory; inspect and record them again')
+    # User preferences, display choice and generated runtime files are retained.
+    effective=dict(report['files'])
+    for name in MUTABLE: effective[name]=expected['files'][name]
+    return dict(report,files=effective),payload
 
 def restore_backup(backup,automatic=False):
     backup=backup.resolve(); manifest=read_json(backup/'manifest.json')
@@ -374,7 +412,10 @@ def restore_backup(backup,automatic=False):
 
 def install(args):
     game=Path(args.game_dir).resolve(); build_dir=Path(args.build).resolve()
-    report,payload=validate_install(build_dir,game)
+    updating=getattr(args,'command',None)=='update'
+    expected=read_json(args.expected_current) if updating else None
+    validate=lambda:validate_update(build_dir,game,expected) if updating else validate_install(build_dir,game)
+    report,payload=validate()
     saves=Path(args.save_dir).resolve() if args.save_dir else default_save_dir().resolve()
     before=snapshots(saves)
     stamp=datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S-%f')
@@ -391,12 +432,14 @@ def install(args):
             require(file_hash(backup/'files'/name)==old,'Original game backup verification failed')
         records.append({'name':name,'existed':existed,'beforeSha256':old,'installedSha256':report['files'][name]})
     manifest={'gameDirectory':str(game),'version':report['version'],'files':records,
-              'saveFiles':before,'status':'backed-up','profile':'ultrawide','inheritMode':0}
+              'saveFiles':before,'status':'backed-up','profile':'ultrawide','inheritMode':0,
+              'operation':'update' if updating else 'install'}
     write_json(backup/'manifest.json',manifest)
     # Recheck after backup before the first installed byte is changed.
-    validate_install(build_dir,game)
+    validate()
     try:
         for item in records:
+            if updating and (item['name'] in MUTABLE or item['beforeSha256']==item['installedSha256']):continue
             shutil.copy2(payload/item['name'],game/item['name'])
             require(file_hash(game/item['name'])==item['installedSha256'],'Installed file hash mismatch')
         require(snapshots(saves)==before,'Saves changed during installation; close the game and inspect the backup')
@@ -404,9 +447,12 @@ def install(args):
         restore_backup(backup,automatic=True)
         raise
     manifest['status']='installed'; write_json(backup/'manifest.json',manifest)
-    print('Installed. Launch through Steam. Check Stats and ship unlocks immediately after first launch.')
-    print('Original ae_prof.sav remains untouched; Hyperspace imports it into hs_ultrawide_prof.sav on first launch.')
-    print('This does not promise migration of an active vanilla Continue run. New mod progress does not sync back to vanilla.')
+    print('Updated.' if updating else 'Installed.', 'Launch through Steam. Check Continue, Stats and ship unlocks.')
+    if updating:
+        print('Current saves and production namespace were preserved. No profile or checkpoint was restored.')
+    else:
+        print('Original ae_prof.sav remains untouched; Hyperspace imports it into hs_ultrawide_prof.sav on first launch.')
+        print('This does not promise migration of an active vanilla Continue run. New mod progress does not sync back to vanilla.')
     print('Rollback command: python release/ftl_ultrawide.py restore --backup "'+str(backup)+'"')
 
 def main():
@@ -419,6 +465,12 @@ def main():
     p=sub.add_parser('install',help='Back up then install a verified local build')
     p.add_argument('--game-dir',required=True); p.add_argument('--build',required=True)
     p.add_argument('--save-dir'); p.set_defaults(run=install)
+    p=sub.add_parser('inventory',help='Record current modded files for review before updating')
+    p.add_argument('--game-dir',required=True);p.add_argument('--out',required=True)
+    p.set_defaults(run=lambda a:write_json(a.out,inventory(a.game_dir)))
+    p=sub.add_parser('update',help='Back up then update an unchanged, reviewed modded installation')
+    p.add_argument('--game-dir',required=True);p.add_argument('--build',required=True)
+    p.add_argument('--expected-current',required=True);p.add_argument('--save-dir');p.set_defaults(run=install)
     p=sub.add_parser('restore',help='Restore game files; never restore/overwrite saves')
     p.add_argument('--backup',required=True); p.set_defaults(run=lambda a:restore_backup(Path(a.backup)))
     args=parser.parse_args()
