@@ -18,3 +18,7 @@ Packaging validation performed 2026-10-17. Gameplay observations are from the pr
 Previously checked live: startup/loading, Steam entry behavior, selected menus/shops/events/combat, pause and modal darkening, hangar/ship list, nebula/storm effects, hazard flashes, Credits and original profile unlock/statistics import. Screenshots show the verified private build's title and plasma-storm presentation.
 
 No uninterrupted full campaign, other display hardware, localized layout, overhaul compatibility or higher-resolution same-ratio run has been validated. These remain beta test goals; passing reconstruction/installer checks does not establish them.
+
+## Beta.4 follow-up, 2026-10-18
+
+The MSVC x86 build and all 13 installer/update tests pass. The pristine local build verifies 17 native UI fallbacks, 31 panorama/crop pairs, six source-dependent texture reconstructions and 651 unchanged base sprite PNGs. Disposable UI checks cover reactor normal/hover/queued/MAX states, purchase costs across a column boundary, Undo refunds, and store Buy/Sell Close frames and clicks at Modded 3440x1440 and Windowed 1280x720. See [UI causes and scope](BUGFIX-NOTES.md).

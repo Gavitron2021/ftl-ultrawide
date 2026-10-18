@@ -30,6 +30,18 @@ static void removeDllRelocation(std::vector<char>& bytes, uint32_t target) {
 }
 
 static void patchHyperspaceUi(std::vector<char>& bytes, int width, uintptr_t bounds) {
+    // CustomReactor.cpp::OnRender: omit only the per-column price draw.
+    // This stdcall wrapper pops 16 argument bytes; its paired caller adjustment
+    // must also be omitted to keep the stack balanced. Capacity/next price/MAX
+    // use separate calls. Apply this presentation preference in every mode.
+    constexpr size_t columnPrice = 0x5b6a11;
+    const std::array<uint8_t,15> expectedPrice{
+        0xc7,0x04,0x24,0x05,0,0,0,0xe8,0x63,0xa0,0xe3,0xff,0x83,0xec,0x10};
+    for (size_t i=0; i<expectedPrice.size(); ++i)
+        if (static_cast<uint8_t>(bytes.at(columnPrice+i))!=expectedPrice[i])
+            fail("Unexpected Hyperspace reactor price draw");
+    memset(bytes.data()+columnPrice+7,0x90,8);
+
     auto replace = [&](size_t at, std::initializer_list<uint8_t> expected,
                        size_t operand, uint32_t value) {
         size_t i=0;

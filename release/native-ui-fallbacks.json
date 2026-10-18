@@ -1,5 +1,5 @@
 {
-  "reason": "Native label-free upgrade/reactor textures and the native Accept frame match current dynamic text and button geometry. Other selected Shiny resources remain enabled.",
+  "reason": "Native label-free upgrade/reactor textures and native ship Accept/store Close frames match current dynamic text and button geometry. Other selected Shiny resources remain enabled.",
   "files": [
     "img/upgradeUI/Equipment/equipment_reactor_off.png",
     "img/upgradeUI/Equipment/equipment_reactor_on.png",
@@ -16,6 +16,7 @@
     "img/upgradeUI/upgrade_system_bar_off.png",
     "img/upgradeUI/upgrade_system_bar_on.png",
     "img/upgradeUI/upgrade_system_bar_select2.png",
-    "img/upgradeUI/buttons_accept_base.png"
+    "img/upgradeUI/buttons_accept_base.png",
+    "img/storeUI/store_close_base.png"
   ]
 }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.4
+
+- Hide reactor column price labels in every display mode; capacity, next cost, queued upgrades and MAX remain visible. Upgrade and refund calculations are unchanged.
+- Restore the native store Close frame to align its artwork with the current button hover/click area on Buy and Sell tabs. Other selected Shiny resources remain enabled.
+
 ## 0.1.0-beta.3
 
 - Right-side tooltips use the active viewport edge, accounting for the outer translation of centered menus; hover and click coordinates remain native.

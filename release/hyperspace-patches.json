@@ -30,6 +30,15 @@
   "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/d5bf1270498291fe3bccf9c55822dc2da4f1a702/src/game/Utilities/Renderer.cpp",
   "runtimeUi": {
     "implementation": "native/hyperspace-ui.h",
+    "reactorColumnPrices": {
+      "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/v1.23.2/src/game/UserInterface/CustomReactor.cpp",
+      "functionRva": "0x5b6c20",
+      "guardFileOffset": "0x5b6a11",
+      "guardBytes": "c7042405000000e863a0e3ff83ec10",
+      "instructionFileOffset": "0x5b6a18",
+      "replacementBytes": "9090909090909090",
+      "scope": "All display modes. Omit the font-5 column-price draw and its paired stack adjustment only; retain capacity, next cost, MAX and all upgrade/refund calculations."
+    },
     "chargeBar": {
       "source": "https://github.com/FTL-Hyperspace/FTL-Hyperspace/blob/v1.23.2/src/game/Gameplay/CustomWeapons.cpp",
       "functionRva": "0x45b620",

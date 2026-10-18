@@ -28,7 +28,7 @@ PAYLOAD = {'FTLGame.exe', 'FTL-Ultrawide.exe', 'FTLGame-1.6.9.exe', 'ftl.dat',
            'Hyperspace.classic.dll', 'Hyperspace.dll', 'xinput1_4.dll',
            'settings.ini', 'ultrawide-runtime.cfg', 'steam_appid.txt'}
 MUTABLE = {'settings.ini', 'Hyperspace.dll', 'ultrawide-runtime.cfg'}
-VERSION = '0.1.0-beta.3'
+VERSION = '0.1.0-beta.4'
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()

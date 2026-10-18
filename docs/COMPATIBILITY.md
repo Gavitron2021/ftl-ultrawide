@@ -25,6 +25,8 @@ Higher resolution at the same ratio means **uniform scaling**, not horizontal di
 
 ## Test scope
 
+Beta.4 additionally checks hidden reactor column labels, the 8-to-11 capacity price boundary (65 scrap), complete Undo refund, final 24-to-25 purchase and MAX, plus store Buy pages and Sell-tab Close hover/click. Modded 3440x1440 and Windowed 1280x720 were checked; outside/inside Close-edge clicks were checked in Windowed mode. The Classic layout shares the 1280-wide renderer but was not replayed for beta.4.
+
 Beta.3 adds isolated verification of right-edge tooltips/clicks, reactor costs/capacity and queued/MAX states, ship Accept hover/click, a centered store, sensor reveal and two enemy weapon layouts, plus Classic/Windowed restarts. The installed production update is also checked through the actual Steam entry point with current progress retained. [UI causes and detailed scope](BUGFIX-NOTES.md).
 
 At 3440×1440: startup/loading, normal Steam entry behavior, main menu/Stats, title/hangar/ship list, selected shop pages and equipment displays, pause/modal darkening, selected combat/events, nebula/storm presentation including plasma storms, hazard flashes, Credits, normal shutdown and original vanilla profile import. Base ship/crew/weapon resource integrity was checked.
