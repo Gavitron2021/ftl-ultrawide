@@ -60,9 +60,21 @@ static void installDisplayChoices(HANDLE process, uintptr_t base, int mode) {
     auto active = reinterpret_cast<uintptr_t>(VirtualAllocEx(process, nullptr, 4,
         MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
     if (!active) fail("Cannot allocate active display mode");
-    // Borderless is a presentation choice over the existing Modded renderer.
-    // Keep the native render paths on their already-verified mode value.
-    writeMemory(process, active, mode==5 ? 4 : mode);
+    writeMemory(process, active, mode);
+    auto renderer = active;
+    auto presentation = active;
+    if (mode == 5) {
+        auto modes = reinterpret_cast<uintptr_t>(VirtualAllocEx(process, nullptr, 8,
+            MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
+        if (!modes) fail("Cannot allocate Borderless display modes");
+        // Wide framebuffer/layout, ordinary windowed focus and presentation.
+        // A fullscreen focus loss sets CApp::minimized and skips every frame,
+        // even when the backend's automatic window minimization is disabled.
+        writeMemory<int>(process, modes, 4);
+        writeMemory<int>(process, modes+4, 0);
+        renderer = modes;
+        presentation = modes+4;
+    }
     for (auto rva : {0x15d5u,0x1611u,0x1667u,0x1686u,0x2a47u,0x2a5fu,
                      0x2b0bu,0x2b65u,0x2c24u,0x2e37u,0x3669u,0x2f61u,0x2e22u,0x2e79u}) {
         uint32_t preferred = (rva == 0x2f61 || rva == 0x2e22 || rva == 0x2e79) ? 0x8c8ca4 : 0x8c8ca0;
@@ -70,7 +82,11 @@ static void installDisplayChoices(HANDLE process, uintptr_t base, int mode) {
         uint32_t delta = static_cast<uint32_t>(base - 0x400000);
         bool pending = current == preferred && delta;
         if (current != preferred && current != preferred + delta) fail("Unexpected display mode operand");
-        writeMemory(process, base + rva, static_cast<uint32_t>(active - (pending ? delta : 0)));
+        // Only framebuffer setup/update reads need the Modded enum. Focus
+        // handlers (including GenInputEvents' inlined copies) and
+        // UpdateFullScreen must agree with the backend's windowed state.
+        auto target = (rva == 0x3669 || rva == 0x2f61) ? renderer : presentation;
+        writeMemory(process, base + rva, static_cast<uint32_t>(target - (pending ? delta : 0)));
     }
     RemoteCode code(process);
     // Cycle Windowed -> Classic -> Modded -> Borderless -> Windowed. The unscaled/native

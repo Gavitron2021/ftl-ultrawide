@@ -1,10 +1,27 @@
-# FTL Ultrawide 0.1.0-beta.5
+# FTL Ultrawide 0.1.0-beta.6
 
-Adds **Borderless (Modded)** for the **Windows Steam base-game Advanced Edition** beta at **3440x1440 (43:18)**. Select it in Options and restart. It uses the ultrawide layout in an exact desktop-sized borderless window, without changing display mode or automatically minimizing when focus moves to another app. Windowed, Classic and existing Modded remain available. Includes the beta.4 reactor/store and prior UI fixes. [Setup and scope](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/BORDERLESS.md).
+Corrects **Borderless (Modded)** window/focus behavior and adds optional,
+reversible NVIDIA DXGI presentation for capture stability and smoother app
+switching. Select Borderless in Options and restart. On the tested RTX 5080 host,
+Discord-sharing GPU allocation stayed near 235–261 MB for six minutes after
+previously growing to about 8 GB; the tester confirmed smooth streaming and HDR.
+Rapid switching/opening apps can still stutter. [Setup and scope](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/BORDERLESS.md).
+
+For this NVIDIA workaround, append **`--nvidia-dxgi`** to install/update. It creates
+one installation-specific driver profile and records guarded rollback; global
+settings and existing user profiles are not modified. The flag is explicit and
+should be omitted on other GPUs. Keep the timestamped installation backup.
+
+Fresh Start, first event, HUD/ship interaction, normal Save+Quit and Continue
+passed in all four offered modes. Native compilation, local reconstruction/archive
+guards and 22 installer/profile rollback tests passed. The earlier immediate
+run-entry access violation remains unproven and did not reproduce in acceptance.
+This remains a community-test beta on one hardware configuration, with the
+**60 FPS limit unchanged**. [Investigation details](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/BUGFIX-NOTES.md).
 
 Existing users can use the new [guarded update route](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md#update-an-existing-modded-installation): rebuild from pristine owned inputs, inventory the current modded copy, then update with current-file/save backups and settings preservation. Keep the earlier vanilla rollback backup. Do not rerun the fresh installer against a modded archive.
 
-**Download `FTL-Ultrawide-0.1.0-beta.5.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
+**Download `FTL-Ultrawide-0.1.0-beta.6.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
 
 Current setup help: [visual mod download links](https://github.com/Gavitron2021/ftl-ultrawide#required-visual-mod-downloads) and [copyable agent / LLM preparation and installation prompts](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/AGENT-SETUP.md). These online guides supplement the documentation originally packaged in the beta ZIP.
 

@@ -28,7 +28,7 @@ PAYLOAD = {'FTLGame.exe', 'FTL-Ultrawide.exe', 'FTLGame-1.6.9.exe', 'ftl.dat',
            'Hyperspace.classic.dll', 'Hyperspace.dll', 'xinput1_4.dll',
            'settings.ini', 'ultrawide-runtime.cfg', 'steam_appid.txt'}
 MUTABLE = {'settings.ini', 'Hyperspace.dll', 'ultrawide-runtime.cfg'}
-VERSION = '0.1.0-beta.5'
+VERSION = '0.1.0-beta.6'
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -403,6 +403,12 @@ def restore_backup(backup,automatic=False):
             require(file_hash(local_path(backup/'files',item['name']))==item['beforeSha256'],'Original backup is damaged')
         elif path.exists() and item['name'] not in MUTABLE:
             require(file_hash(path)==item['installedSha256'],f'Added file changed: {item["name"]}; inspect it before restoring')
+    presentation=manifest.get('nvidiaPresentation')
+    if presentation:
+        import nvidia_presentation
+        require(Path(presentation['application']).resolve()==game/'FTLGame-1.6.9.exe','Driver transaction targets another installation')
+        nvidia_presentation.check_restore(presentation)
+        nvidia_presentation.restore(presentation)
     for item in records:
         path=local_path(game,item['name'])
         if item['existed']:
@@ -419,6 +425,10 @@ def install(args):
     expected=read_json(args.expected_current) if updating else None
     validate=lambda:validate_update(build_dir,game,expected) if updating else validate_install(build_dir,game)
     report,payload=validate()
+    presentation=None
+    if getattr(args,'nvidia_dxgi',False):
+        import nvidia_presentation
+        presentation=nvidia_presentation.plan(game)
     saves=Path(args.save_dir).resolve() if args.save_dir else default_save_dir().resolve()
     before=snapshots(saves)
     stamp=datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S-%f')
@@ -437,6 +447,7 @@ def install(args):
     manifest={'gameDirectory':str(game),'version':report['version'],'files':records,
               'saveFiles':before,'status':'backed-up','profile':'ultrawide','inheritMode':0,
               'operation':'update' if updating else 'install'}
+    if presentation:manifest['nvidiaPresentation']=presentation
     write_json(backup/'manifest.json',manifest)
     # Recheck after backup before the first installed byte is changed.
     validate()
@@ -446,11 +457,13 @@ def install(args):
             shutil.copy2(payload/item['name'],game/item['name'])
             require(file_hash(game/item['name'])==item['installedSha256'],'Installed file hash mismatch')
         require(snapshots(saves)==before,'Saves changed during installation; close the game and inspect the backup')
+        if presentation:nvidia_presentation.apply(presentation,backup)
     except Exception:
         restore_backup(backup,automatic=True)
         raise
     manifest['status']='installed'; write_json(backup/'manifest.json',manifest)
     print('Updated.' if updating else 'Installed.', 'Launch through Steam. Check Continue, Stats and ship unlocks.')
+    if presentation:print('NVIDIA DXGI presentation enabled for this installation only; rollback includes its driver profile.')
     if updating:
         print('Current saves and production namespace were preserved. No profile or checkpoint was restored.')
     else:
@@ -468,12 +481,14 @@ def main():
     p=sub.add_parser('install',help='Back up then install a verified local build')
     p.add_argument('--game-dir',required=True); p.add_argument('--build',required=True)
     p.add_argument('--save-dir'); p.set_defaults(run=install)
+    p.add_argument('--nvidia-dxgi',action='store_true',help='Use a reversible per-installation NVIDIA DXGI profile for capture and Borderless focus switching')
     p=sub.add_parser('inventory',help='Record current modded files for review before updating')
     p.add_argument('--game-dir',required=True);p.add_argument('--out',required=True)
     p.set_defaults(run=lambda a:write_json(a.out,inventory(a.game_dir)))
     p=sub.add_parser('update',help='Back up then update an unchanged, reviewed modded installation')
     p.add_argument('--game-dir',required=True);p.add_argument('--build',required=True)
     p.add_argument('--expected-current',required=True);p.add_argument('--save-dir');p.set_defaults(run=install)
+    p.add_argument('--nvidia-dxgi',action='store_true',help='Use a reversible per-installation NVIDIA DXGI profile for capture and Borderless focus switching')
     p=sub.add_parser('restore',help='Restore game files; never restore/overwrite saves')
     p.add_argument('--backup',required=True); p.set_defaults(run=lambda a:restore_backup(Path(a.backup)))
     args=parser.parse_args()

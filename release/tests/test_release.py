@@ -188,4 +188,44 @@ class InstallerTests(unittest.TestCase):
         for n,data in before.items():self.assertEqual((self.game/n).read_bytes(),data)
         self.assertEqual((self.saves/'hs_ultrawide_continue.sav').read_bytes(),b'current campaign')
 
+    def test_nvidia_profile_and_files_roll_back_together(self):
+        import nvidia_presentation as n
+        from test_nvidia_presentation import MemoryDrs, driver_store
+        store=driver_store()
+        with patch.object(n,'Drs',side_effect=lambda:MemoryDrs(store)):
+            uw.install(argparse.Namespace(game_dir=self.game,build=self.build,save_dir=self.saves,nvidia_dxgi=True))
+            backup=next(self.game.glob('ftl-ultrawide-backup-*'))
+            self.assertEqual(len(store['profiles']),2)
+            (self.saves/'hs_ultrawide_prof.sav').write_bytes(b'earned progress')
+            uw.restore_backup(backup)
+            self.assert_original()
+            self.assertEqual(store,driver_store())
+            self.assertEqual((self.saves/'hs_ultrawide_prof.sav').read_bytes(),b'earned progress')
+
+    def test_nvidia_failure_after_commit_restores_profile_and_files(self):
+        import nvidia_presentation as n
+        from test_nvidia_presentation import MemoryDrs, driver_store
+        store=driver_store();store['fail_after_commit']=True
+        with patch.object(n,'Drs',side_effect=lambda:MemoryDrs(store)):
+            with self.assertRaisesRegex(ValueError,'after driver commit'):
+                uw.install(argparse.Namespace(game_dir=self.game,build=self.build,save_dir=self.saves,nvidia_dxgi=True))
+        self.assert_original()
+        self.assertEqual(store,driver_store())
+        backup=next(self.game.glob('ftl-ultrawide-backup-*'))
+        self.assertEqual(uw.read_json(backup/'manifest.json')['status'],'automatically-rolled-back')
+
+    def test_changed_driver_profile_refused_before_file_restore(self):
+        import nvidia_presentation as n
+        from test_nvidia_presentation import MemoryDrs, driver_store
+        store=driver_store()
+        with patch.object(n,'Drs',side_effect=lambda:MemoryDrs(store)):
+            uw.install(argparse.Namespace(game_dir=self.game,build=self.build,save_dir=self.saves,nvidia_dxgi=True))
+            backup=next(self.game.glob('ftl-ultrawide-backup-*'))
+            plan=uw.read_json(backup/'manifest.json')['nvidiaPresentation']
+            store['profiles'][plan['profileName']]['settings']=2
+            before={n:(self.game/n).read_bytes() for n in uw.PAYLOAD}
+            with self.assertRaisesRegex(ValueError,'customized'):
+                uw.restore_backup(backup)
+            for name,data in before.items():self.assertEqual((self.game/name).read_bytes(),data)
+
 if __name__=='__main__':unittest.main()

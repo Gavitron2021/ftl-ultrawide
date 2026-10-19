@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-beta.6
+
+- Use the windowed backend and focus path for Borderless while retaining the ultrawide framebuffer/layout; keep rendering while unfocused.
+- Add explicit `--nvidia-dxgi` to install/update: a guarded, reversible NVIDIA profile restricted to this installation. It resolved capture-related GPU memory growth and substantially improved app switching on the tested host.
+- Verify fresh Start, first event, HUD/ship interaction, normal Save+Quit and Continue in every offered display mode. Preserve existing saves and display preference during updates.
+- Keep the 60 FPS limit. The initial run-entry access violation remains unproven; the later NVIDIA capture failure is separately identified.
+
 ## 0.1.0-beta.5
 
 - Add Borderless (Modded) to the display cycle and `--borderless` to the launcher. The saved choice applies on restart.

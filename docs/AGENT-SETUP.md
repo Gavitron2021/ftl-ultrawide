@@ -4,7 +4,7 @@ Use these prompts with an agent that can read local files and run Windows comman
 
 The first prompt prepares and verifies a **local build**. The second authorizes installation of that build. This separation gives you a concrete result to review before changing Steam's game files. If you have already explicitly authorized installation in your agent session, that authorization can cover the second phase; there is no need to request it again.
 
-The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware testing; see [the display table](COMPATIBILITY.md). Older beta ZIPs retain the documentation originally packaged with them; this page is the current repository guidance for the beta.5 tools.
+The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware testing; see [the display table](COMPATIBILITY.md). Older beta ZIPs retain the documentation originally packaged with them; this page is the current repository guidance for the beta.6 tools.
 
 ## 1. Copyable preparation prompt
 
@@ -12,8 +12,8 @@ The prompts do not broaden the mod's compatibility. Only 3440×1440 has hardware
 Help me prepare FTL Ultrawide using its documented public beta tools.
 
 Project: https://github.com/Gavitron2021/ftl-ultrawide
-Release: v0.1.0-beta.5
-Release page: https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.5
+Release: v0.1.0-beta.6
+Release page: https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.6
 Current install guide: https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md
 
 My setup:
@@ -105,7 +105,7 @@ The official download section is [here](INSTALL.md#downloads). An inaccessible a
 After reviewing a successful prepared build, use this prompt if you want the agent to install it:
 
 ```text
-Install the verified FTL Ultrawide beta.5 build we prepared.
+Install the verified FTL Ultrawide beta.6 build we prepared.
 
 - FTL game directory: [same absolute path used for preparation]
 - Verified local build directory: [absolute path containing build.json/payload]

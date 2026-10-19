@@ -1,4 +1,37 @@
-# Beta.4 and beta.3 UI corrections
+# Beta.6 crash and Borderless investigation
+
+Beta.5's desktop-sized window still used CApp/SIL fullscreen focus handling:
+rendering fell from about 60 FPS focused to zero while unfocused, even with
+auto-minimize disabled. Beta.6 uses windowed backend/focus state and popup styling;
+the ultrawide framebuffer/layout and Options launch-choice comparisons stay intact.
+The corrected isolated probe rendered about 59.8 FPS both focused and unfocused.
+
+A later Discord capture crash was separately identified as `0xc0000409` in
+`nvoglv32.dll+0xd4ecc9`, with NVIDIA error 6 (GPU memory unavailable) and an
+OpenGL `glFlush` frame chain. Repeating sharing on the native-only correction
+grew dedicated GPU allocation to about 8 GB. With NVIDIA's per-app DXGI
+presentation setting it held near 235–261 MB for six minutes. The tester confirmed
+smooth streaming and correct HDR appearance. App switching improved substantially;
+aggressive repeated switching/opening apps can still stutter. [Setup and limits](BORDERLESS.md).
+
+The original immediate run-entry `0xc0000005` had no matching dump and did not
+reproduce in the repeated isolated Start/Continue checks. Its cause is unproven;
+the NVIDIA capture failure should not be used as proof of that earlier cause.
+
+Fresh Kestrel runs in Windowed, Classic, Modded and Borderless reached and dismissed
+the first event, accepted HUD/ship-menu interaction, saved normally, restarted and
+Continued with the same crew and seed. These are short acceptance runs on one
+Windows 11 / RTX 5080 / 3440x1440 system. Full campaign/all-hardware stability is
+not established. The native profile warning was traced to a filename mismatch: the native validator
+checks `ae_prof.new.sav` after Hyperspace redirects creation to the namespaced
+profile. A private observation recorded a nonzero file length (312 bytes), then
+a false existence result for the original vanilla temporary filename. Hyperspace
+subsequently validates and renames the actual namespaced file. New profiles and
+checkpoints were nonempty and reloaded in acceptance. The warning remains visible;
+this finding does not excuse other save failures.
+No old checkpoint was restored, and no user profile/unlocks were reset.
+
+## Earlier UI corrections
 
 The supported canvas remains 1720×720, scaled 2× at 3440×1440. Its added width is 440 logical pixels, with 220 logical pixels of centered menu padding per side. These are different transforms.
 

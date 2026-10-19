@@ -1,27 +1,18 @@
-// The pinned SIL backend already creates a WS_POPUP window without changing
-// display modes when the requested size matches the desktop and refresh is 0.
-// Keep that path at the exact desktop size and disable fullscreen auto-minimize.
+// Use SIL's windowed backend with a desktop-sized popup. Merely disabling
+// fullscreen auto-minimize leaves both SIL and CApp in their fullscreen paths.
 static void installBorderlessDesktop(HANDLE process, uintptr_t base) {
-    RemoteCode code(process);
-    auto string = [&](const char* text) {
-        auto address=code.here();
-        do { code.bytes.push_back(static_cast<uint8_t>(*text)); } while (*text++);
-        return address;
-    };
-    const auto minimize=string("fullscreen_minimize_on_focus_loss");
-    const auto refresh=string("refresh_rate");
-    const auto stub=code.here();
-    code.emit({0x60}); // preserve the original display-attribute call's registers
-    code.emit({0x6a,0x00,0x68}); code.u32(minimize);
-    code.call(base+0x224c50); code.emit({0x83,0xc4,0x08});
-    code.emit({0x6a,0x00,0x6a,0x00,0x68}); code.u32(refresh); // vararg double 0
-    code.call(base+0x224c50); code.emit({0x83,0xc4,0x0c,0x61});
-    code.tail(base+0x224c50); // original window_resizable attribute and return
-    code.finish();
-    if (readMemory<uint8_t>(process,base+0x2738)!=0xe8 ||
-        0x2738+5+readMemory<int32_t>(process,base+0x2739)!=0x224c50)
-        fail("Unexpected window setup attribute call");
-    writeMemory<uint32_t>(process,base+0x2739,static_cast<uint32_t>(stub-(base+0x2738+5)));
+    // CApp::SetupWindow still chooses the desktop dimensions, but requests
+    // graphics_set_display_attr("window", 1) and records windowed state.
+    patch<uint32_t>(process,base,0x27ff,0,1);
+    patch<uint32_t>(process,base,0x2832,1,0);
+
+    // SIL's window_resizable attribute normally computes WS_OVERLAPPEDWINDOW.
+    // Keep its existing window lifecycle and DC/context ownership; only replace
+    // the computed style with WS_POPUP | WS_MINIMIZEBOX for this child.
+    // This avoids all fullscreen display-mode and minimize/restore transitions.
+    patch<uint32_t>(process,base,0x279781,0xfffb0000,0);
+    patch<uint32_t>(process,base,0x279787,0x00cf0000,0x80020000);
+
 
     // FTL normally adds a one-pixel fullscreen fringe. Borderless uses the
     // desktop rectangle exactly; viewport scaling and mouse conversion agree.
@@ -30,5 +21,5 @@ static void installBorderlessDesktop(HANDLE process, uintptr_t base) {
         fail("Unexpected initial fullscreen fringe");
     writeMemory(process,base+0x27f4,std::array<uint8_t,7>{0x90,0x90,0x90,0x90,0x90,0x90,0x90});
     patch<uint16_t>(process,base,0x2e81,0xc701,0x9090);
-    logFile << "Borderless desktop: exact desktop size, default refresh, focus auto-minimize disabled\n";
+    logFile << "Borderless desktop: windowed backend and focus handling, desktop popup, no display-mode switching\n";
 }
