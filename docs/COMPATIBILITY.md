@@ -25,7 +25,7 @@ Higher resolution at the same ratio means **uniform scaling**, not horizontal di
 
 ## Test scope
 
-Beta.6 corrects Borderless backend/focus behavior and adds optional per-installation NVIDIA DXGI presentation. Fresh Start through first event, HUD/ship interaction, Save+Quit and Continue passed in all four offered modes. Discord sharing and HDR appearance were checked on one Windows 11 / RTX 5080 host; rapid switching can still stutter. The original run-entry access violation was not reproduced during acceptance. See [Borderless implementation and limits](BORDERLESS.md).
+Beta.6.1 corrects Borderless backend/focus behavior and adds optional per-installation NVIDIA DXGI presentation. Fresh Start through first event, HUD/ship interaction, Save+Quit and Continue passed in all four offered modes. Discord sharing and HDR appearance were checked on one Windows 11 / RTX 5080 host; rapid switching can still stutter. The original run-entry access violation was not reproduced during acceptance. See [Borderless implementation and limits](BORDERLESS.md).
 
 Beta.4 additionally checks hidden reactor column labels, the 8-to-11 capacity price boundary (65 scrap), complete Undo refund, final 24-to-25 purchase and MAX, plus store Buy pages and Sell-tab Close hover/click. Modded 3440x1440 and Windowed 1280x720 were checked; outside/inside Close-edge clicks were checked in Windowed mode. The Classic layout shares the 1280-wide renderer but was not replayed for beta.4.
 

@@ -6,7 +6,7 @@ Display changes require a restart. The guarded updater preserves the saved choic
 `FTL-Ultrawide.exe --borderless` selects it directly; `--classic` provides recovery.
 
 Borderless fills the primary desktop at its current resolution, without borders,
-a title bar, topmost behavior or a display-mode request. Beta.6 uses the windowed
+a title bar, topmost behavior or a display-mode request. Beta.6.1 uses the windowed
 backend and windowed focus path while retaining the ultrawide framebuffer/layout.
 Rendering continues when another app takes focus. Existing modes retain their paths.
 
@@ -48,7 +48,7 @@ The canvas is still 1720x720 with the same ratio guard. Hardware testing is only
 other capture tools remain unvalidated. HDR appearance was user-checked on this
 host with Windows Auto HDR enabled; no HDR pipeline or higher-detail sprites were added.
 The game still renders OpenGL; the optional driver setting changes its presentation.
-No frame-rate or gameplay-timing changes ship in beta.6.
+No frame-rate or gameplay-timing changes ship in beta.6.1.
 
 [native/borderless.h](../native/borderless.h) checks the owned executable's hash
 and instruction bytes before selecting a borderless popup with a minimize box.

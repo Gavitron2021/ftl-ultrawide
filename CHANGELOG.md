@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.6.1
+
+- Correct the driver-profile test double to resolve Windows short TEMP aliases like the real driver/installer. The tested native launcher and presentation behavior are identical to beta.6.
+- Publish the package after clean-runner verification; beta.6 has no release download.
+
 ## 0.1.0-beta.6
 
 - Use the windowed backend and focus path for Borderless while retaining the ultrawide framebuffer/layout; keep rendering while unfocused.

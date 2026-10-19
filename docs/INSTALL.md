@@ -6,7 +6,7 @@ If an agent or LLM is helping, use the **[copyable setup and installation prompt
 
 ## Downloads
 
-Extract **FTL-Ultrawide-0.1.0-beta.6.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.6) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
+Extract **FTL-Ultrawide-0.1.0-beta.6.1.zip** from [Releases](https://github.com/Gavitron2021/ftl-ultrawide/releases/tag/v0.1.0-beta.6.1) outside your game folder. It includes our launcher. A source checkout instead needs [the launcher build](BUILD.md).
 
 Obtain these exact files from their authors and place/extract them under one dependency directory, e.g. `C:\FTL-Mod-Dependencies`. Subdirectories are searched; all inputs are SHA-256 checked against [`release/dependencies.json`](../release/dependencies.json).
 

@@ -1,8 +1,8 @@
-# Beta.6 crash and Borderless investigation
+# Beta.6.1 crash and Borderless investigation
 
 Beta.5's desktop-sized window still used CApp/SIL fullscreen focus handling:
 rendering fell from about 60 FPS focused to zero while unfocused, even with
-auto-minimize disabled. Beta.6 uses windowed backend/focus state and popup styling;
+auto-minimize disabled. Beta.6.1 uses windowed backend/focus state and popup styling;
 the ultrawide framebuffer/layout and Options launch-choice comparisons stay intact.
 The corrected isolated probe rendered about 59.8 FPS both focused and unfocused.
 

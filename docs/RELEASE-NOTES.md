@@ -1,4 +1,4 @@
-# FTL Ultrawide 0.1.0-beta.6
+# FTL Ultrawide 0.1.0-beta.6.1
 
 Corrects **Borderless (Modded)** window/focus behavior and adds optional,
 reversible NVIDIA DXGI presentation for capture stability and smoother app
@@ -12,6 +12,9 @@ one installation-specific driver profile and records guarded rollback; global
 settings and existing user profiles are not modified. The flag is explicit and
 should be omitted on other GPUs. Keep the timestamped installation backup.
 
+The initial beta.6 tag exposed a Windows short-TEMP-path issue in the test fixture.
+Beta.6.1 corrects the fixture; the tested native binary is unchanged.
+
 Fresh Start, first event, HUD/ship interaction, normal Save+Quit and Continue
 passed in all four offered modes. Native compilation, local reconstruction/archive
 guards and 22 installer/profile rollback tests passed. The earlier immediate
@@ -21,7 +24,7 @@ This remains a community-test beta on one hardware configuration, with the
 
 Existing users can use the new [guarded update route](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md#update-an-existing-modded-installation): rebuild from pristine owned inputs, inventory the current modded copy, then update with current-file/save backups and settings preservation. Keep the earlier vanilla rollback backup. Do not rerun the fresh installer against a modded archive.
 
-**Download `FTL-Ultrawide-0.1.0-beta.6.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
+**Download `FTL-Ultrawide-0.1.0-beta.6.1.zip`**, not GitHub's automatic source ZIP if you want the compiled launcher. Check `SHA256SUMS.txt`, extract outside FTL, then follow [INSTALL.md](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/INSTALL.md). Python 3.11+ and Pillow are required. Source/build instructions and installer tests are included.
 
 Current setup help: [visual mod download links](https://github.com/Gavitron2021/ftl-ultrawide#required-visual-mod-downloads) and [copyable agent / LLM preparation and installation prompts](https://github.com/Gavitron2021/ftl-ultrawide/blob/main/docs/AGENT-SETUP.md). These online guides supplement the documentation originally packaged in the beta ZIP.
 

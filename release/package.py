@@ -7,7 +7,7 @@ import zipfile
 
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'release/dist'
-VERSION='0.1.0-beta.6'
+VERSION='0.1.0-beta.6.1'
 ALLOWED_ROOT={'README.md','LICENSE','CREDITS.md','CHANGELOG.md','.gitignore'}
 ALLOWED_DIR={'native','docs','release','.github'}
 FORBIDDEN_DIR={'_test','_work','dependencies','dist','bin','__pycache__','backups','runtime','downloads','research'}

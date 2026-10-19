@@ -24,7 +24,9 @@ class MemoryDrs:
 
     def lookup_application(self, application):
         for profile in self.profiles.values():
-            if profile.get('application', '').replace('\\', '/').casefold() == application.replace('\\', '/').casefold():
+            # Windows runner TEMP can use an 8.3 alias. DRS and the installer
+            # canonicalize paths; the in-memory driver must do the same.
+            if str(Path(profile.get('application', '')).resolve()).casefold() == str(Path(application).resolve()).casefold():
                 return copy.deepcopy(profile)
         return None
 
